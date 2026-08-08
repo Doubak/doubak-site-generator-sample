@@ -177,7 +177,10 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     var hits = [];
     for (var i = 0; i < rows.length; i++) {
       var r = rows[i];
-      var inTitle = r.n && r.n.toLowerCase().indexOf(lq) >= 0;
+      var alias = r.a ? r.a.join(' ') : '';
+      
+      var inTitle = (r.n && r.n.toLowerCase().indexOf(lq) >= 0)
+        || (alias && alias.toLowerCase().indexOf(lq) >= 0);
       var inBody = r.c && r.c.toLowerCase().indexOf(lq) >= 0;
       
       
@@ -193,8 +196,12 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
       var h = hits[k], d = h.r;
       var title = d.n || (d.t === 'b' ? '广播' : '未知作品');
       var where = KIND[d.t] + (d.k ? ' · ' + (NAMES[d.k] || d.k) : '');
+      
+      var hitAlias = d.a && d.a.join(' ').toLowerCase().indexOf(lq) >= 0
+        ? '<div class="snip">' + snippet(d.a.join(' / '), lq) + '</div>' : '';
       html += '<div class="hit"><a href="' + esc(d.u) + '.html">' + esc(title) + '</a>'
         + '<div class="meta">' + esc(where) + (d.d ? ' · ' + esc(d.d) : '') + '</div>'
+        + hitAlias
         + (d.c ? '<div class="snip">' + snippet(d.c, lq) + '</div>' : '')
         + '</div>';
     }
