@@ -168,6 +168,27 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
 }
 .chip-plain { background: var(--bg-alt); color: var(--text-dim); border-color: var(--line); }
 
+/* ── 状态筛选条 ───────────────────────────────────────────────── */
+
+/* 每一片都是一个真实页面的链接（见 partials/statuschips.html）。
+   做成按钮大小是有意的：手指点得到，而这是列表页上最常用的一个动作。 */
+.chips { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0 0 var(--s5); }
+.chips .chip {
+  font-size: .9rem; line-height: 2; padding: 0 var(--s3);
+  background: var(--bg-alt); color: var(--text-dim); border-color: var(--line);
+  transition: border-color .12s ease, color .12s ease;
+}
+.chips .chip b { color: var(--text); font-variant-numeric: tabular-nums; margin-left: 2px; }
+.chips .chip:hover { border-color: var(--brand); color: var(--brand); text-decoration: none; }
+/* 当前这一片。**颜色之外还给了字重与实心底**——只靠颜色的话，
+   色觉障碍的读者看不出自己正站在哪一格。 */
+.chips .chip-on,
+.chips .chip-on:hover {
+  background: var(--brand); border-color: var(--brand);
+  color: #fff; font-weight: 600;
+}
+.chips .chip-on b { color: #fff; }
+
 /* ── 汇总条 ───────────────────────────────────────────────────── */
 
 .summary {
