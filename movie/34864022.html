@@ -8,64 +8,7 @@
 
 <title>请求救援 / Send Help · 我的豆瓣存档</title>
 
-<style>
-:root {
-  --bg: #fdfdfc; --fg: #1a1a18; --dim: #6b6b64; --line: #e4e4de; --accent: #7a6a3f;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #16161a; --fg: #e8e8e4; --dim: #96968c; --line: #2c2c32; --accent: #c4b07a; }
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.7 system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
-        "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-}
-.wrap { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1.2rem 5rem; }
-a { color: inherit; }
-a:hover { color: var(--accent); }
-header.site { border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
-header.site .wrap { padding-bottom: .9rem; padding-top: 1.1rem; }
-header.site nav { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .5rem; }
-header.site nav a { text-decoration: none; color: var(--dim); font-size: .92rem; }
-header.site nav a:hover { color: var(--accent); }
-header.site .home { font-weight: 600; text-decoration: none; }
-h1 { font-size: 1.5rem; line-height: 1.35; margin: 0 0 .4rem; }
-h2 { font-size: 1.15rem; margin: 2.2rem 0 .8rem; }
-h3 { font-size: 1rem; margin: 1.8rem 0 .5rem; font-weight: 600; }
-.dim { color: var(--dim); font-size: .9rem; }
-.grid {
-  display: grid; gap: 1.4rem 1rem; padding: 0; list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-}
-.grid a { text-decoration: none; display: block; }
-.grid img {
-  width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block;
-  background: var(--line); border-radius: 3px;
-}
- 
-.grid .nocover {
-  width: 100%; aspect-ratio: 2/3; background: var(--line); border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--dim); font-size: .8rem; text-align: center; padding: .5rem;
-}
-.grid .t { font-size: .86rem; line-height: 1.4; margin-top: .45rem; }
-.grid .m { font-size: .78rem; color: var(--dim); }
-.pager { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: .3rem .8rem; align-items: baseline; font-size: .9rem; }
-.pager a, .pager strong { padding: .1rem .35rem; }
-.pager strong { background: var(--line); border-radius: 3px; }
-article img { max-width: 100%; height: auto; border-radius: 3px; }
-blockquote {
-  margin: 1rem 0; padding: .1rem 0 .1rem 1rem;
-  border-left: 2px solid var(--line); color: var(--dim);
-}
-.entry { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 1.8rem; }
-.entry:first-of-type { border-top: 0; }
-table { border-collapse: collapse; }
-td, th { padding: .2rem .8rem .2rem 0; text-align: left; }
-footer.site { border-top: 1px solid var(--line); margin-top: 4rem; }
-footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
-</style>
+<link rel="stylesheet" href="../site.css">
 </head>
 <body>
 
@@ -81,7 +24,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       <a href="../game/index.html">游戏</a>
     
-      <a href="../movie/index.html">影视</a>
+      <a href="../movie/index.html" aria-current="page">影视</a>
     
       <a href="../music/index.html">音乐</a>
     
@@ -93,7 +36,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   </nav>
 </div></header>
 
-<div class="wrap">
+<main><div class="wrap">
 
 
 
@@ -101,27 +44,32 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
   
-  <h1>请求救援 / Send Help</h1>
+  <div class="subject-head">
+    <img src="../covers/p2928975987.jpg" alt="" loading="lazy">
+    <div class="facts">
+      <h1>请求救援 / Send Help</h1>
+      <div class="meta-line">
+        <span class="chip">看过</span>
+        
 
-  <p class="dim">
-    影视
-    · 看过
-     · 2026-03-27
-     · 4 星
-  </p>
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
 
-  
 
-  
-    
-    <p class="dim">又名：荒岛囚救(台) / 脑细天劫(港)</p>
-  
+        <span> · 2026-03-27</span>
+        <span> · 影视</span>
+      </div>
+      
+        
+        <div class="aka">又名：荒岛囚救(台) / 脑细天劫(港)</div>
+      
+      
+        
+        <div class="meta-line">2026-01-28(韩国) / 2026-01-30(美国) / 瑞秋·麦克亚当斯 / 迪伦·奥布莱恩 / 伊迪尔·伊斯梅尔 / 丹尼斯·海斯伯特 / 泽维尔·塞缪尔 / 吴育刚 / 塔内·瓦拉库努娄 / 艾玛·雷米 / 克里斯蒂·贝斯特 / 弗朗塞斯卡·沃特斯 / 美国 / 加拿大 / 英国 / 澳大利亚 / 泰国 / 山姆·雷米 / 113分钟 / 请求救援 / 惊悚 / 冒险 / 恐怖 / 达米安·香农 Damian Shannon / 马克·斯威夫特 Mark Swift / 英语</div>
+      
+      <div class="meta-line"><span class="chip chip-plain">美国</span> <span class="chip chip-plain">猎奇</span> <span class="chip chip-plain">冒险</span> <span class="chip chip-plain">人性</span> </div>
+    </div>
+  </div>
 
-  <p><img src="../covers/p2928975987.jpg" alt="" style="max-width:14rem"></p>
-
-  
-    
-    <p class="dim">2026-01-28(韩国) / 2026-01-30(美国) / 瑞秋·麦克亚当斯 / 迪伦·奥布莱恩 / 伊迪尔·伊斯梅尔 / 丹尼斯·海斯伯特 / 泽维尔·塞缪尔 / 吴育刚 / 塔内·瓦拉库努娄 / 艾玛·雷米 / 克里斯蒂·贝斯特 / 弗朗塞斯卡·沃特斯 / 美国 / 加拿大 / 英国 / 澳大利亚 / 泰国 / 山姆·雷米 / 113分钟 / 请求救援 / 惊悚 / 冒险 / 恐怖 / 达米安·香农 Damian Shannon / 马克·斯威夫特 Mark Swift / 英语</p>
   
 
   <p>很猎奇，很有意思，永远猜不到接下来会发生什么，就连最后场景会出现在澳大利亚也是我没有想到的 （sea cliff bridge）。很不错</p>
@@ -180,28 +128,24 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 <p><em>广播 · 想看</em></p>
 
 
-  
-    <p class="dim">标签：美国 · 猎奇 · 冒险 · 人性</p>
-  
 
 
 
-
-<p class="dim" style="margin-top:2.5rem">
+<p class="dim small" style="margin-top:2.5rem">
   
   最后一次看到是 2026-08-01T11:03:58&#43;10:00
-  
-    · <a href="https://movie.douban.com/subject/34864022/" rel="noreferrer">豆瓣原页</a>
-  
+   · <a href="https://movie.douban.com/subject/34864022/" rel="noreferrer noopener" target="_blank">豆瓣原页</a>
 </p>
 
 </article>
 
-</div>
+</div></main>
 
 <footer class="site"><div class="wrap">
+  
   由 <a href="https://github.com/Doubak">豆备 (Doubak)</a> 从本地档案生成 ——
-  <strong>整个过程零网络请求，这个页面也不发一个外部请求。</strong>
+  这是一份个人存档，与豆瓣网无关。<br>
+  整个过程零网络请求，这个页面也不发一个外部请求。
 </div></footer>
 
 </body>

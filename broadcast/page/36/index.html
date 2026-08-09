@@ -8,64 +8,7 @@
 
 <title>广播 · 我的豆瓣存档</title>
 
-<style>
-:root {
-  --bg: #fdfdfc; --fg: #1a1a18; --dim: #6b6b64; --line: #e4e4de; --accent: #7a6a3f;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #16161a; --fg: #e8e8e4; --dim: #96968c; --line: #2c2c32; --accent: #c4b07a; }
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.7 system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
-        "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-}
-.wrap { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1.2rem 5rem; }
-a { color: inherit; }
-a:hover { color: var(--accent); }
-header.site { border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
-header.site .wrap { padding-bottom: .9rem; padding-top: 1.1rem; }
-header.site nav { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .5rem; }
-header.site nav a { text-decoration: none; color: var(--dim); font-size: .92rem; }
-header.site nav a:hover { color: var(--accent); }
-header.site .home { font-weight: 600; text-decoration: none; }
-h1 { font-size: 1.5rem; line-height: 1.35; margin: 0 0 .4rem; }
-h2 { font-size: 1.15rem; margin: 2.2rem 0 .8rem; }
-h3 { font-size: 1rem; margin: 1.8rem 0 .5rem; font-weight: 600; }
-.dim { color: var(--dim); font-size: .9rem; }
-.grid {
-  display: grid; gap: 1.4rem 1rem; padding: 0; list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-}
-.grid a { text-decoration: none; display: block; }
-.grid img {
-  width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block;
-  background: var(--line); border-radius: 3px;
-}
- 
-.grid .nocover {
-  width: 100%; aspect-ratio: 2/3; background: var(--line); border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--dim); font-size: .8rem; text-align: center; padding: .5rem;
-}
-.grid .t { font-size: .86rem; line-height: 1.4; margin-top: .45rem; }
-.grid .m { font-size: .78rem; color: var(--dim); }
-.pager { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: .3rem .8rem; align-items: baseline; font-size: .9rem; }
-.pager a, .pager strong { padding: .1rem .35rem; }
-.pager strong { background: var(--line); border-radius: 3px; }
-article img { max-width: 100%; height: auto; border-radius: 3px; }
-blockquote {
-  margin: 1rem 0; padding: .1rem 0 .1rem 1rem;
-  border-left: 2px solid var(--line); color: var(--dim);
-}
-.entry { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 1.8rem; }
-.entry:first-of-type { border-top: 0; }
-table { border-collapse: collapse; }
-td, th { padding: .2rem .8rem .2rem 0; text-align: left; }
-footer.site { border-top: 1px solid var(--line); margin-top: 4rem; }
-footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
-</style>
+<link rel="stylesheet" href="../../../site.css">
 </head>
 <body>
 
@@ -75,7 +18,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       <a href="../../../book/index.html">书</a>
     
-      <a href="../../../broadcast/index.html">广播</a>
+      <a href="../../../broadcast/index.html" aria-current="page">广播</a>
     
       <a href="../../../drama/index.html">舞台剧</a>
     
@@ -93,7 +36,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   </nav>
 </div></header>
 
-<div class="wrap">
+<main><div class="wrap">
 
 
 
@@ -105,19 +48,20 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
   
-  <p class="dim">
-    共 152 个月 ·
-    
-    
-    3394 条广播，其中 804 条带正文
-  </p>
+  
+  
+  <div class="summary">
+    <span>共 <b>152</b> 个月</span>
+    <span><b>3394</b> 条广播</span>
+    <span>其中 <b>804</b> 条带正文</span>
+  </div>
   <blockquote>广播发布后不可编辑，所以每条都是那一刻的原话。</blockquote>
 
   
   
     <section class="entry">
       <h2><a href="../../../broadcast/2014-12.html">2014年12月</a>
-        <span class="dim">4 条</span></h2>
+        <span class="chip chip-plain">4 条</span></h2>
       <h3 id="2014-12-27-202651">2014-12-27 20:26:51</h3>
 <p>看过 <a href="../../../movie/23034934.html">采访</a></p>
 <h3 id="2014-12-25-235617">2014-12-25 23:56:17</h3>
@@ -131,7 +75,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   
     <section class="entry">
       <h2><a href="../../../broadcast/2014-11.html">2014年11月</a>
-        <span class="dim">5 条</span></h2>
+        <span class="chip chip-plain">5 条</span></h2>
       <h3 id="2014-11-30-204434">2014-11-30 20:44:34</h3>
 <p>听过 <a href="../../../music/23763575.html">Panorama Of Fall Colors Part.2</a></p>
 <h3 id="2014-11-29-214202">2014-11-29 21:42:02</h3>
@@ -147,7 +91,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   
     <section class="entry">
       <h2><a href="../../../broadcast/2014-10.html">2014年10月</a>
-        <span class="dim">7 条</span></h2>
+        <span class="chip chip-plain">7 条</span></h2>
       <h3 id="2014-10-26-234329">2014-10-26 23:43:29</h3>
 <p>看过 <a href="../../../movie/25805741.html">后会无期</a></p>
 <h3 id="2014-10-22-220330">2014-10-22 22:03:30</h3>
@@ -167,7 +111,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   
     <section class="entry">
       <h2><a href="../../../broadcast/2014-09.html">2014年9月</a>
-        <span class="dim">5 条</span></h2>
+        <span class="chip chip-plain">5 条</span></h2>
       <h3 id="2014-09-16-120742">2014-09-16 12:07:42</h3>
 <p>看过 <a href="../../../movie/20257326.html">极品飞车 / Need for Speed</a></p>
 <h3 id="2014-09-03-214724">2014-09-03 21:47:24</h3>
@@ -184,12 +128,11 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   
   
 
-  <nav class="pager">
-    <a href="../../../broadcast/page/35/index.html">← 上一页</a>
+  <nav class="pager" aria-label="翻页">
+    <a href="../../../broadcast/page/35/index.html" rel="prev">← 上一页</a>
 
     
     
-      
       
       
         
@@ -199,135 +142,102 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
+    
+      
       
     
       
       
+    
       
-        <span class="dim">…</span>
       
     
       
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <span class="gap">…</span>
+      
+    
       
       
         
@@ -337,7 +247,6 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
           <a href="../../../broadcast/page/35/index.html">35</a>
         
@@ -345,13 +254,11 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
-          <strong>36</strong>
+          <strong aria-current="page">36</strong>
         
       
     
-      
       
       
         
@@ -361,14 +268,13 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
           <a href="../../../broadcast/page/38/index.html">38</a>
         
       
     
 
-    <a href="../../../broadcast/page/37/index.html">下一页 →</a>
+    <a href="../../../broadcast/page/37/index.html" rel="next">下一页 →</a>
   </nav>
 
 
@@ -376,11 +282,13 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
 
-</div>
+</div></main>
 
 <footer class="site"><div class="wrap">
+  
   由 <a href="https://github.com/Doubak">豆备 (Doubak)</a> 从本地档案生成 ——
-  <strong>整个过程零网络请求，这个页面也不发一个外部请求。</strong>
+  这是一份个人存档，与豆瓣网无关。<br>
+  整个过程零网络请求，这个页面也不发一个外部请求。
 </div></footer>
 
 </body>

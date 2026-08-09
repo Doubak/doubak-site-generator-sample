@@ -8,64 +8,7 @@
 
 <title>影视 · 我的豆瓣存档</title>
 
-<style>
-:root {
-  --bg: #fdfdfc; --fg: #1a1a18; --dim: #6b6b64; --line: #e4e4de; --accent: #7a6a3f;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #16161a; --fg: #e8e8e4; --dim: #96968c; --line: #2c2c32; --accent: #c4b07a; }
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.7 system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
-        "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-}
-.wrap { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1.2rem 5rem; }
-a { color: inherit; }
-a:hover { color: var(--accent); }
-header.site { border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
-header.site .wrap { padding-bottom: .9rem; padding-top: 1.1rem; }
-header.site nav { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .5rem; }
-header.site nav a { text-decoration: none; color: var(--dim); font-size: .92rem; }
-header.site nav a:hover { color: var(--accent); }
-header.site .home { font-weight: 600; text-decoration: none; }
-h1 { font-size: 1.5rem; line-height: 1.35; margin: 0 0 .4rem; }
-h2 { font-size: 1.15rem; margin: 2.2rem 0 .8rem; }
-h3 { font-size: 1rem; margin: 1.8rem 0 .5rem; font-weight: 600; }
-.dim { color: var(--dim); font-size: .9rem; }
-.grid {
-  display: grid; gap: 1.4rem 1rem; padding: 0; list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-}
-.grid a { text-decoration: none; display: block; }
-.grid img {
-  width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block;
-  background: var(--line); border-radius: 3px;
-}
- 
-.grid .nocover {
-  width: 100%; aspect-ratio: 2/3; background: var(--line); border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--dim); font-size: .8rem; text-align: center; padding: .5rem;
-}
-.grid .t { font-size: .86rem; line-height: 1.4; margin-top: .45rem; }
-.grid .m { font-size: .78rem; color: var(--dim); }
-.pager { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: .3rem .8rem; align-items: baseline; font-size: .9rem; }
-.pager a, .pager strong { padding: .1rem .35rem; }
-.pager strong { background: var(--line); border-radius: 3px; }
-article img { max-width: 100%; height: auto; border-radius: 3px; }
-blockquote {
-  margin: 1rem 0; padding: .1rem 0 .1rem 1rem;
-  border-left: 2px solid var(--line); color: var(--dim);
-}
-.entry { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 1.8rem; }
-.entry:first-of-type { border-top: 0; }
-table { border-collapse: collapse; }
-td, th { padding: .2rem .8rem .2rem 0; text-align: left; }
-footer.site { border-top: 1px solid var(--line); margin-top: 4rem; }
-footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
-</style>
+<link rel="stylesheet" href="../../../site.css">
 </head>
 <body>
 
@@ -81,7 +24,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       <a href="../../../game/index.html">游戏</a>
     
-      <a href="../../../movie/index.html">影视</a>
+      <a href="../../../movie/index.html" aria-current="page">影视</a>
     
       <a href="../../../music/index.html">音乐</a>
     
@@ -93,7 +36,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   </nav>
 </div></header>
 
-<div class="wrap">
+<main><div class="wrap">
 
 
 
@@ -105,643 +48,867 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
   
-  <p class="dim">
+  <div class="summary">
     
       
-      在看 19 · 
+      <span>在看 <b>19</b></span>
     
       
-      看过 1336 · 
+      <span>看过 <b>1336</b></span>
     
       
-      想看 747
+      <span>想看 <b>747</b></span>
     
-  </p>
+  </div>
 
   
   <ul class="grid">
     
       <li>
         <a href="../../../movie/35364691.html">
-          
-            <img src="../../../covers/p2917676972.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2917676972.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">诡才之道 / 鬼才之道</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36469477.html">
-          
-            <img src="../../../covers/p2922164119.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2922164119.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">时间之子</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/35263440.html">
-          
-            <img src="../../../covers/p2669131265.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2669131265.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">时光代理人 第一季</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/33464863.html">
-          
-            <img src="../../../covers/p2586800409.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2586800409.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">机智医生生活 / 슬기로운 의사생활</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/35419153.html">
-          
-            <img src="../../../covers/p2924862475.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2924862475.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">利刃出鞘3 / Wake Up Dead Man: A Knives Out Mystery‎</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/35382381.html">
-          
-            <img src="../../../covers/p2925135677.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2925135677.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">刺杀小说家2</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/35483395.html">
-          
-            <img src="../../../covers/p2923749086.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2923749086.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">戏台</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37388213.html">
-          
-            <img src="../../../covers/p2925438389.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2925438389.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">喜人奇妙夜2</div>
           <div class="m">
-            看过
-             · 5 星
+            <span>看过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37649462.html">
-          
-            <img src="../../../covers/p2926242363.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2926242363.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">最后一席话：珍·古道尔博士 / Famous Last Words: Dr. Jane Goodall</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36915988.html">
-          
-            <img src="../../../covers/p2931540164.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2931540164.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">饥饿游戏：收获日出 / The Hunger Games: Sunrise on the Reaping</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36318703.html">
-          
-            <img src="../../../covers/p2934546481.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2934546481.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">逃出绝命街 / The End of Oak Street</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36246195.html">
-          
-            <img src="../../../covers/p2934276912.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2934276912.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">蜘蛛侠：崭新之日 / Spider-Man: Brand New Day</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36238849.html">
-          
-            <img src="../../../covers/p2933391462.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2933391462.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">玩具总动员5 / Toy Story 5</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36768946.html">
-          
-            <img src="../../../covers/p2914213775.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2914213775.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">海洋奇缘2 / Moana 2</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37154591.html">
-          
-            <img src="../../../covers/p2931818516.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2931818516.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">泥面人 / Clayface</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36787273.html">
-          
-            <img src="../../../covers/p2933938140.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2933938140.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">沙丘3 / Dune: Part Three</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37107254.html">
-          
-            <img src="../../../covers/p2931652234.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2931652234.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">末世行者 / The Dog Stars</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36503073.html">
-          
-            <img src="../../../covers/p2929036260.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2929036260.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">暗黑新娘！ / The Bride!</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36723035.html">
-          
-            <img src="../../../covers/p2931769584.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2931769584.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">星球大战：曼达洛人与古古 / Star Wars: The Mandalorian &amp;amp; Grogu</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36860212.html">
-          
-            <img src="../../../covers/p2933170423.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2933170423.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">揭秘日 / Disclosure Day</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36783248.html">
-          
-            <img src="../../../covers/p2934063747.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2934063747.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">挖掘者 / Digger</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36779303.html">
-          
-            <img src="../../../covers/p2931974717.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2931974717.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">巅峰猎杀 / Apex</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37322519.html">
-          
-            <img src="../../../covers/p2932911576.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2932911576.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">如何干一票大的 / How to Rob a Bank</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36011202.html">
-          
-            <img src="../../../covers/p2928363681.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2928363681.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">复仇者联盟5：毁灭之日 / Avengers: Doomsday</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/34927979.html">
-          
-            <img src="../../../covers/p2934487037.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2934487037.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">勇敢者游戏3：开放世界 / Jumanji: Open World</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/26404869.html">
-          
-            <img src="../../../covers/p2926399098.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2926399098.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">惊天魔盗团3 / Now You See Me: Now You Don&amp;#39;t</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36613450.html">
-          
-            <img src="../../../covers/p2922583476.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2922583476.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">废柴英雄 / Underdogs</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36808876.html">
-          
-            <img src="../../../covers/p2933569626.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2933569626.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">奥德赛 / The Odyssey</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37028590.html">
-          
-            <img src="../../../covers/p2921116938.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2921116938.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">启示录酒店 / アポカリプスホテル</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/34603375.html">
-          
-            <img src="../../../covers/p2871828348.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2871828348.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">史前星球 第一季 / Prehistoric Planet Season 1</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37496385.html">
-          
-            <img src="../../../covers/p2927023812.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2927023812.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">K-POP：猎魔女团2 / K-Pop: Demon Hunters Sequel</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/35391124.html">
-          
-            <img src="../../../covers/p2930889053.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2930889053.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">K-POP：猎魔女团 / K-Pop: Demon Hunters</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/30311944.html">
-          
-            <img src="../../../covers/p2615724438.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2615724438.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">数字积木 第一季 / Number Blocks Season 1</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/34819530.html">
-          
-            <img src="../../../covers/p2625018889.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2625018889.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">布鲁伊 第一季 / Bluey Season 1</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37315516.html">
-          
-            <img src="../../../covers/p2927237097.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2927237097.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">祈念守护人 / クスノキの番人</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/26817136.html">
-          
-            <img src="../../../covers/p2926605350.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2926605350.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">疯狂动物城2 / Zootopia 2</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36678284.html">
-          
-            <img src="../../../covers/p2926258773.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2926258773.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">鱿鱼游戏：真人挑战赛 第二季 / Squid Game: The Challenge Season 2</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/37430809.html">
-          
+          <div class="shot">
             
-            <div class="nocover">无封面</div>
-          
+              
+              <div class="nocover">无封面</div>
+            
+          </div>
           <div class="t">鱿鱼游戏：真人挑战赛 第三季 / Squid Game: The Challenge Season 3</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/3036997.html">
-          
-            <img src="../../../covers/p582511565.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p582511565.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">立春</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/1309004.html">
-          
-            <img src="../../../covers/p2504157525.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2504157525.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">孔雀</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36978178.html">
-          
-            <img src="../../../covers/p2920232777.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2920232777.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">大卫·爱登堡：海洋 / Ocean with David Attenborough</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/30433456.html">
-          
-            <img src="../../../covers/p2921570919.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2921570919.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">碟中谍8：最终清算 / Mission: Impossible - The Final Reckoning</div>
           <div class="m">
-            看过
-             · 4 星
+            <span>看过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/35322376.html">
-          
-            <img src="../../../covers/p2919785205.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2919785205.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">夏日口袋 / Summer Pockets</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36413483.html">
-          
-            <img src="../../../covers/p2924467125.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2924467125.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">盐之路 / The Salt Path</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/10174444.html">
-          
-            <img src="../../../covers/p1634119717.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p1634119717.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">剧场版魔法少女小圆 前篇 起始的故事 / 劇場版 魔法少女まどか☆マギカ [前編] 始まりの物語</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/36848001.html">
-          
-            <img src="../../../covers/p2918142476.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2918142476.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">BJ单身日记4 / Bridget Jones: Mad About the Boy</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/3009053.html">
-          
-            <img src="../../../covers/p2188953026.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2188953026.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">记忆传授人 / The Giver</div>
           <div class="m">
-            想看
+            <span>想看</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../movie/3868141.html">
-          
-            <img src="../../../covers/p2403803540.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/p2403803540.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">单身日记：好孕来袭 / Bridget Jones&amp;#39;s Baby</div>
           <div class="m">
-            看过
-             · 3 星
+            <span>看过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
@@ -749,12 +916,11 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   </ul>
   
 
-  <nav class="pager">
-    <a href="../../../movie/page/2/index.html">← 上一页</a>
+  <nav class="pager" aria-label="翻页">
+    <a href="../../../movie/page/2/index.html" rel="prev">← 上一页</a>
 
     
     
-      
       
       
         
@@ -764,7 +930,6 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
           <a href="../../../movie/page/2/index.html">2</a>
         
@@ -772,13 +937,11 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
-          <strong>3</strong>
+          <strong aria-current="page">3</strong>
         
       
     
-      
       
       
         
@@ -788,7 +951,6 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
           <a href="../../../movie/page/5/index.html">5</a>
         
@@ -796,159 +958,120 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
-        <span class="dim">…</span>
-      
-    
-      
-      
+        <span class="gap">…</span>
       
     
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
-      
     
-      
-      
-      
-    
-      
       
       
     
       
       
+    
+      
       
     
       
       
+    
+      
       
     
       
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
       
       
         
@@ -957,7 +1080,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
       
     
 
-    <a href="../../../movie/page/4/index.html">下一页 →</a>
+    <a href="../../../movie/page/4/index.html" rel="next">下一页 →</a>
   </nav>
 
 
@@ -965,11 +1088,13 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
 
-</div>
+</div></main>
 
 <footer class="site"><div class="wrap">
+  
   由 <a href="https://github.com/Doubak">豆备 (Doubak)</a> 从本地档案生成 ——
-  <strong>整个过程零网络请求，这个页面也不发一个外部请求。</strong>
+  这是一份个人存档，与豆瓣网无关。<br>
+  整个过程零网络请求，这个页面也不发一个外部请求。
 </div></footer>
 
 </body>

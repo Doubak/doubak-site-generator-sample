@@ -8,64 +8,7 @@
 
 <title>游戏 · 我的豆瓣存档</title>
 
-<style>
-:root {
-  --bg: #fdfdfc; --fg: #1a1a18; --dim: #6b6b64; --line: #e4e4de; --accent: #7a6a3f;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #16161a; --fg: #e8e8e4; --dim: #96968c; --line: #2c2c32; --accent: #c4b07a; }
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.7 system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
-        "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-}
-.wrap { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1.2rem 5rem; }
-a { color: inherit; }
-a:hover { color: var(--accent); }
-header.site { border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
-header.site .wrap { padding-bottom: .9rem; padding-top: 1.1rem; }
-header.site nav { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .5rem; }
-header.site nav a { text-decoration: none; color: var(--dim); font-size: .92rem; }
-header.site nav a:hover { color: var(--accent); }
-header.site .home { font-weight: 600; text-decoration: none; }
-h1 { font-size: 1.5rem; line-height: 1.35; margin: 0 0 .4rem; }
-h2 { font-size: 1.15rem; margin: 2.2rem 0 .8rem; }
-h3 { font-size: 1rem; margin: 1.8rem 0 .5rem; font-weight: 600; }
-.dim { color: var(--dim); font-size: .9rem; }
-.grid {
-  display: grid; gap: 1.4rem 1rem; padding: 0; list-style: none;
-  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-}
-.grid a { text-decoration: none; display: block; }
-.grid img {
-  width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block;
-  background: var(--line); border-radius: 3px;
-}
- 
-.grid .nocover {
-  width: 100%; aspect-ratio: 2/3; background: var(--line); border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--dim); font-size: .8rem; text-align: center; padding: .5rem;
-}
-.grid .t { font-size: .86rem; line-height: 1.4; margin-top: .45rem; }
-.grid .m { font-size: .78rem; color: var(--dim); }
-.pager { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: .3rem .8rem; align-items: baseline; font-size: .9rem; }
-.pager a, .pager strong { padding: .1rem .35rem; }
-.pager strong { background: var(--line); border-radius: 3px; }
-article img { max-width: 100%; height: auto; border-radius: 3px; }
-blockquote {
-  margin: 1rem 0; padding: .1rem 0 .1rem 1rem;
-  border-left: 2px solid var(--line); color: var(--dim);
-}
-.entry { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 1.8rem; }
-.entry:first-of-type { border-top: 0; }
-table { border-collapse: collapse; }
-td, th { padding: .2rem .8rem .2rem 0; text-align: left; }
-footer.site { border-top: 1px solid var(--line); margin-top: 4rem; }
-footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
-</style>
+<link rel="stylesheet" href="../../../site.css">
 </head>
 <body>
 
@@ -79,7 +22,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       <a href="../../../drama/index.html">舞台剧</a>
     
-      <a href="../../../game/index.html">游戏</a>
+      <a href="../../../game/index.html" aria-current="page">游戏</a>
     
       <a href="../../../movie/index.html">影视</a>
     
@@ -93,7 +36,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   </nav>
 </div></header>
 
-<div class="wrap">
+<main><div class="wrap">
 
 
 
@@ -105,643 +48,867 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
   
-  <p class="dim">
+  <div class="summary">
     
       
-      在玩 39 · 
+      <span>在玩 <b>39</b></span>
     
       
-      玩过 306 · 
+      <span>玩过 <b>306</b></span>
     
       
-      想玩 259
+      <span>想玩 <b>259</b></span>
     
-  </p>
+  </div>
 
   
   <ul class="grid">
     
       <li>
         <a href="../../../game/35496235.html">
-          
-            <img src="../../../covers/s33923351.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33923351.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">银河战士 生存恐惧 メトロイド ドレッド</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/26771073.html">
-          
-            <img src="../../../covers/s29445241.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s29445241.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">传颂之物 二人的白皇 うたわれるもの 二人の白皇</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30485336.html">
-          
-            <img src="../../../covers/s30022189.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s30022189.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">影子工厂 Impostor Factory</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/34438578.html">
-          
-            <img src="../../../covers/s34024463.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34024463.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">遗忘之城 The Forgotten City</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/34428633.html">
-          
-            <img src="../../../covers/s33994290.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33994290.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">死亡循环 DEATHLOOP</div>
           <div class="m">
-            在玩
+            <span>在玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35404095.html">
-          
+          <div class="shot">
             
-            <div class="nocover">无封面</div>
-          
+              
+              <div class="nocover">无封面</div>
+            
+          </div>
           <div class="t">未知作品</div>
           <div class="m">
-            在玩
+            <span>在玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/27608217.html">
-          
-            <img src="../../../covers/s33841003.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33841003.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">迷室4：往逝 The Room 4: Old Sins</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/26615836.html">
-          
-            <img src="../../../covers/s33450386.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33450386.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">十三机兵防卫圈 十三機兵防衛圏</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/26855597.html">
-          
-            <img src="../../../covers/s34215445.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34215445.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">胡闹厨房 Overcooked!</div>
           <div class="m">
-            玩过
-             · 4 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35063676.html">
-          
-            <img src="../../../covers/s33952772.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33952772.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">上行战场 The Ascent</div>
           <div class="m">
-            在玩
-             · 5 星
+            <span>在玩</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35494558.html">
-          
-            <img src="../../../covers/s33921108.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33921108.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">佣兵烈焰：黎明的双龙 Mercenaries Blaze</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/25944957.html">
-          
-            <img src="../../../covers/s28071040.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s28071040.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">节奏地牢 Crypt of the NecroDancer</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/27186857.html">
-          
-            <img src="../../../covers/s33730332.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33730332.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">洞穴探险2 Spelunky 2</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/24706178.html">
-          
-            <img src="../../../covers/s26562855.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s26562855.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">以撒的结合 The Binding of Isaac</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35002117.html">
-          
-            <img src="../../../covers/s34151863.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34151863.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">避风港 Haven</div>
           <div class="m">
-            玩过
-             · 3 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="3 星" aria-label="3 星">★★★<span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30223200.html">
-          
-            <img src="../../../covers/s35012867.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s35012867.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">潜行者2：切尔诺贝利之心 S.T.A.L.K.E.R. 2: Heart of Chernobyl</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/10747843.html">
-          
-            <img src="../../../covers/s24922958.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s24922958.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">潜行者：切尔诺贝利的阴影 S.T.A.L.K.E.R.: Shadow of Chernobyl</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35494586.html">
-          
-            <img src="../../../covers/s34117795.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34117795.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">最终幻想起源：天堂的陌路人 STRANGER OF PARADISE FINAL FANTASY ORIGIN</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/26425696.html">
-          
-            <img src="../../../covers/s33489676.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33489676.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">最终幻想7 重启 FINAL FANTASY VII REMAKE</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/27179486.html">
-          
-            <img src="../../../covers/s33923352.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33923352.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">真女神转生5 真·女神転生V</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35206694.html">
-          
-            <img src="../../../covers/s33899021.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33899021.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">怪物猎人物语2 破灭之翼 モンスターハンターストーリーズ2 破滅の翼</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/27082495.html">
-          
-            <img src="../../../covers/s33961244.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33961244.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">萨默维尔 Somerville</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/27066087.html">
-          
-            <img src="../../../covers/s34146963.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34146963.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">瘟疫传说：无罪 A Plague Tale: Innocence</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35494627.html">
-          
-            <img src="../../../covers/s34244820.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34244820.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">灵魂 Soulstice</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/26295661.html">
-          
-            <img src="../../../covers/s27978325.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s27978325.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">消逝的光芒 Dying Light</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35494565.html">
-          
-            <img src="../../../covers/s34126904.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34126904.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">极限竞速：地平线5 Forza Horizon 5</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35410019.html">
-          
-            <img src="../../../covers/s33857726.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33857726.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">奇异人生 复刻版 Life is Strange Remastered</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35494571.html">
-          
-            <img src="../../../covers/s34756346.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34756346.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">取而代之 Replaced</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/26820321.html">
-          
-            <img src="../../../covers/s34674898.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34674898.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">轮舞曲Duo：黎明的最强音 輪舞曲Duo -夜明けのフォルテシモ- ぷにゅぷりff</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35370474.html">
-          
-            <img src="../../../covers/s34054374.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34054374.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">筑梦颂 Dorfromantik</div>
           <div class="m">
-            玩过
-             · 4 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/27064952.html">
-          
-            <img src="../../../covers/s29470733.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s29470733.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">凤凰点 Phoenix Point</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/25810639.html">
-          
-            <img src="../../../covers/s27200634.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s27200634.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">符文工房4 ルーンファクトリー4</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30459606.html">
-          
-            <img src="../../../covers/s33899020.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33899020.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">符文工厂5 ルーンファクトリー5</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/34995216.html">
-          
-            <img src="../../../covers/s34044446.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34044446.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">鬼灭之刃 火之神血风谭 鬼滅の刃 ヒノカミ血風譚</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35097643.html">
-          
-            <img src="../../../covers/s34124622.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34124622.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">瑞奇与叮当：时空跳转 Ratchet &amp;amp; Clank: Rift Apart</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35110438.html">
-          
-            <img src="../../../covers/s33857713.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33857713.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">双人成行 It Takes Two</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35206695.html">
-          
-            <img src="../../../covers/s33729050.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33729050.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">怪物猎人 崛起 モンスターハンターライズ</div>
           <div class="m">
-            在玩
+            <span>在玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30247034.html">
-          
-            <img src="../../../covers/s29792077.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s29792077.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">超能队长的奇异冒险 The Awesome Adventures of Captain Spirit</div>
           <div class="m">
-            玩过
-             · 4 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30485000.html">
-          
-            <img src="../../../covers/s34193216.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34193216.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">歧路旅人 大陆的霸者 オクトパストラベラー 大陸の覇者</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35060848.html">
-          
-            <img src="../../../covers/s33822078.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33822078.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">灵媒 The Medium</div>
           <div class="m">
-            玩过
-             · 4 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35043884.html">
-          
-            <img src="../../../covers/s33749247.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33749247.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">幽灵行者 Ghostrunner</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35244867.html">
-          
-            <img src="../../../covers/s35021311.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s35021311.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">戴森球计划 Dyson Sphere Program</div>
           <div class="m">
-            在玩
-             · 5 星
+            <span>在玩</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/34915054.html">
-          
-            <img src="../../../covers/s33809275.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33809275.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">勇气默示录2 ブレイブリーデフォルト II</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30246116.html">
-          
-            <img src="../../../covers/s29935686.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s29935686.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">寂静之人 THE QUIET MAN</div>
           <div class="m">
-            玩过
-             · 2 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="2 星" aria-label="2 星">★★<span class="off">★</span><span class="off">★</span><span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/35364062.html">
-          
-            <img src="../../../covers/s34080303.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34080303.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">三角战略 トライアングルストラテジー</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30246114.html">
-          
-            <img src="../../../covers/s33524218.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33524218.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">控制 Control</div>
           <div class="m">
-            玩过
-             · 5 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="5 星" aria-label="5 星">★★★★★</span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/34430165.html">
-          
-            <img src="../../../covers/s33720300.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s33720300.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">渡神纪 芬尼斯崛起 Immortals Fenyx Rising</div>
           <div class="m">
-            玩过
-             · 4 星
+            <span>玩过</span>
+            
+
+<span class="stars" title="4 星" aria-label="4 星">★★★★<span class="off">★</span></span>
+
+
           </div>
         </a>
       </li>
     
       <li>
         <a href="../../../game/30316905.html">
-          
-            <img src="../../../covers/s34130946.jpg" alt="" loading="lazy">
-          
+          <div class="shot">
+            
+              <img src="../../../covers/s34130946.jpg" alt="" loading="lazy">
+            
+          </div>
           <div class="t">嗜血本性 Bloodroots</div>
           <div class="m">
-            想玩
+            <span>想玩</span>
             
+
+
           </div>
         </a>
       </li>
@@ -749,12 +916,11 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
   </ul>
   
 
-  <nav class="pager">
-    <a href="../../../game/page/4/index.html">← 上一页</a>
+  <nav class="pager" aria-label="翻页">
+    <a href="../../../game/page/4/index.html" rel="prev">← 上一页</a>
 
     
     
-      
       
       
         
@@ -764,11 +930,9 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
-        <span class="dim">…</span>
+        <span class="gap">…</span>
       
     
-      
       
       
         
@@ -778,7 +942,6 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
           <a href="../../../game/page/4/index.html">4</a>
         
@@ -786,13 +949,11 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
-          <strong>5</strong>
+          <strong aria-current="page">5</strong>
         
       
     
-      
       
       
         
@@ -802,7 +963,6 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
         
           <a href="../../../game/page/7/index.html">7</a>
         
@@ -810,27 +970,21 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
     
       
       
-      
-        <span class="dim">…</span>
-      
-    
-      
-      
+        <span class="gap">…</span>
       
     
-      
       
       
     
       
       
+    
+      
       
     
       
       
-      
     
-      
       
       
         
@@ -839,7 +993,7 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
       
     
 
-    <a href="../../../game/page/6/index.html">下一页 →</a>
+    <a href="../../../game/page/6/index.html" rel="next">下一页 →</a>
   </nav>
 
 
@@ -847,11 +1001,13 @@ footer.site .wrap { padding: 1.2rem; font-size: .85rem; color: var(--dim); }
 
 
 
-</div>
+</div></main>
 
 <footer class="site"><div class="wrap">
+  
   由 <a href="https://github.com/Doubak">豆备 (Doubak)</a> 从本地档案生成 ——
-  <strong>整个过程零网络请求，这个页面也不发一个外部请求。</strong>
+  这是一份个人存档，与豆瓣网无关。<br>
+  整个过程零网络请求，这个页面也不发一个外部请求。
 </div></footer>
 
 </body>
