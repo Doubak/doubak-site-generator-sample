@@ -103,10 +103,15 @@ header.site {
   backdrop-filter: saturate(1.4) blur(6px);
 }
 header.site .wrap { display: flex; align-items: center; gap: var(--s5); min-height: 56px; flex-wrap: wrap; }
+/* 首页上这是个 `<h1>`，其余页面上是个 `<a>`（见 baseof.html）。
+   样式挂在 class 上而不是标签上，所以两种情形长得一模一样。 */
 header.site .home {
   font-weight: 700; font-size: 1.05rem; color: var(--text);
   display: flex; align-items: center; gap: var(--s2);
+  margin: 0;
 }
+header.site .home a { color: inherit; }
+header.site .home a:hover { text-decoration: none; }
 header.site .home::before {
   /* 一枚小方块当标识。**不用豆瓣的商标**——像它的配色可以，用它的标记不行。 */
   content: ""; width: 16px; height: 16px; border-radius: 4px;
@@ -204,16 +209,6 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
 .browse a { font-weight: 500; }
 .browse b { margin-left: 2px; }
 
-/*
- * 只读给屏幕阅读器。首页的 <h1> 用它：页眉上每一页都挂着同一句站名，首页再显示
- * 一遍就是重复；但一个没有 h1 的页面对屏幕阅读器与外部检索都是残的。
- *
- * 不用 display:none —— 那会让它对屏幕阅读器也一起消失，等于没写。
- */
-.sr-only {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
-}
 
 /* ── 单页 ─────────────────────────────────────────────────────── */
 
