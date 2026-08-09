@@ -218,6 +218,43 @@ blockquote p:last-child { margin-bottom: 0; }
 
 article img { max-width: 100%; height: auto; border-radius: var(--r2); }
 
+/* ── 广播的附图 ───────────────────────────────────────────────── */
+
+/*
+ * **只在广播页缩略。** 日记正文里的插图是文章的一部分，要看得清；广播的附图是
+ * 一次发九张、十八张的随手拍——实测这份档案里一条广播最多 18 张，铺满宽度就是
+ * 十八屏，正文被推到看不见。
+ *
+ * 生成器把一条广播的附图写在同一行里，所以它们落在同一个 `<p>` 里；给个高度
+ * 上限，它们就自动排成一排并按宽度换行，不需要任何脚本，也不需要 `:has()`。
+ * 每张都链到自己，点开就是原图——缩略是为了能读，不是为了藏起来。
+ */
+.section-broadcast .entry p a,
+.section-broadcast article p a { display: inline-block; line-height: 0; }
+.section-broadcast .entry p img,
+.section-broadcast article p img {
+  /* 两个上限一起给，**不裁**：图按比例缩到这个框里，一点内容都不少。
+     `object-fit: cover` 会裁掉边缘——对一份存档来说，那是把已经存下来的东西
+     藏起来。实测这批附图是 1080×607 的截图，缩到 12rem 宽约 4 张一行。 */
+  max-height: 9rem; max-width: 12rem; width: auto;
+  margin: 0 var(--s2) var(--s2) 0; border-radius: var(--r1);
+  background: var(--bg-alt);
+  transition: transform .12s ease;
+}
+/* **只有一张图的时候放大些。** 29 条带图广播里 13 条只有一张——那多半是特意
+   发的一张照片，缩成缩略图就没什么可看的了。仍然远不到铺满屏幕。 */
+.section-broadcast .entry p a:only-child img,
+.section-broadcast article p a:only-child img { max-height: 22rem; max-width: 100%; }
+.section-broadcast .entry p a:hover img,
+.section-broadcast article p a:hover img { transform: translateY(-2px); }
+
+@media (max-width: 640px) {
+  .section-broadcast .entry p img,
+  .section-broadcast article p img { max-height: 6rem; max-width: 8rem; }
+  .section-broadcast .entry p a:only-child img,
+  .section-broadcast article p a:only-child img { max-height: 14rem; max-width: 100%; }
+}
+
 table { border-collapse: collapse; width: 100%; font-size: .92rem; margin: 0 0 var(--s5); }
 th, td { text-align: left; padding: var(--s2) var(--s4) var(--s2) 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-weight: 600; color: var(--text-dim); }

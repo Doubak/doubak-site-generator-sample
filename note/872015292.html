@@ -36,7 +36,8 @@
   </nav>
 </div></header>
 
-<main><div class="wrap">
+
+<main class="section-note"><div class="wrap">
 
 
 
@@ -53,29 +54,16 @@
 
 
   </div>
-  <p>今天发现豆瓣终于可以绑定海外手机号了，这样可以省去一大堆麻烦事。因为我国内的手机号并不会一直带在身边。
-那么这个问题怎么解决呢，通过开发者工具看一下这个网络验证请求的payload数据其实是错误的 (URL: <a href="https://accounts.douban.com/j/mobile/rebind/complete">https://accounts.douban.com/j/mobile/rebind/complete</a>)：
-ck=JBf5old_phone=+86xxxxxxxxxxxarea_code=+86 (这里错了，对我来说这个数字应该是61)number=xxxxxxxxxxcode=xxxx所以解决方法很简答，在开发者工具里面把这个request的cURL拷贝下来，然后把area_code变成你的新手机号的区号，然后运行那个cURL直接就可以了。</p>
-<pre><code>                科技
-                生活
-    
-
-            
-                
-
-
-
-
-
-
-            
-
-                
-
-本文版权归 MewX 所有，任何形式转载请联系作者。
-
-了解版权计划
-</code></pre>
+  <p>今天发现豆瓣终于可以绑定海外手机号了，这样可以省去一大堆麻烦事。因为我国内的手机号并不会一直带在身边。</p>
+<p>那么这个问题怎么解决呢，通过开发者工具看一下这个网络验证请求的payload数据其实是错误的 (URL: <a href="https://accounts.douban.com/j/mobile/rebind/complete">https://accounts.douban.com/j/mobile/rebind/complete</a>)：</p>
+<ul>
+<li>ck=JBf5</li>
+<li>old_phone=+86xxxxxxxxxxx</li>
+<li>area_code=+86 (这里错了，对我来说这个数字应该是61)</li>
+<li>number=xxxxxxxxxx</li>
+<li>code=xxxx</li>
+</ul>
+<p>所以解决方法很简答，在开发者工具里面把这个request的cURL拷贝下来，然后把area_code变成你的新手机号的区号，然后运行那个cURL直接就可以了。</p>
 
 
 
