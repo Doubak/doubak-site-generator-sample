@@ -103,12 +103,21 @@ header.site {
   backdrop-filter: saturate(1.4) blur(6px);
 }
 header.site .wrap { display: flex; align-items: center; gap: var(--s5); min-height: 56px; flex-wrap: wrap; }
-/* 首页上这是个 `<h1>`，其余页面上是个 `<a>`（见 baseof.html）。
-   样式挂在 class 上而不是标签上，所以两种情形长得一模一样。 */
+/*
+ * 首页上这是个 `<h1>`，其余页面上是个 `<a>`（见 baseof.html）。
+ *
+ * **所以这里必须把下面那条 `h1 { … }` 设的每一项都盖掉**，一项不落：
+ * font-size、line-height、margin、letter-spacing。
+ * 漏一项，首页的这一句就与其余页面长得不一样——实测漏掉 line-height 与
+ * letter-spacing 时，首页页眉里的站名与右边那排导航对不齐。
+ *
+ * 加这条注释是因为这个坑会复发：以后往 `h1 { … }` 里加一项样式，这里就得跟着加。
+ * `test/pages.test.js` 里有一条判据在比对这两处，加漏了会红。
+ */
 header.site .home {
   font-weight: 700; font-size: 1.05rem; color: var(--text);
   display: flex; align-items: center; gap: var(--s2);
-  margin: 0;
+  margin: 0; line-height: 1.7; letter-spacing: normal;
 }
 header.site .home a { color: inherit; }
 header.site .home a:hover { text-decoration: none; }
