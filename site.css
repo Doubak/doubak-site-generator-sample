@@ -203,6 +203,60 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
 }
 .chips .chip-on b { color: #fff; }
 
+/* ── 首页的封面条 ─────────────────────────────────────────────── */
+
+/*
+ * 首页每个状态一行封面。生成器把它写成一个 Markdown 列表——**不是**一段并排的图片，
+ * 因为广播预览那一行也是「`<p>` 里有 `<a><img>`」，两者在 CSS 里就分不开了，
+ * 而它们该有的大小差着一倍。`<ul><li>` 是纯 Markdown 就能给出的结构区分。
+ *
+ * **一行就是一行**：`nowrap` + `overflow: hidden`，摆不下的裁掉。首页要的是
+ * 「有这么些东西」的一瞥，不是把 747 部电影摊开。右边一道渐隐，让「后面还有」
+ * 看得出来，而不是像被切断了。
+ */
+.section-home main ul {
+  display: flex; flex-wrap: nowrap; gap: var(--s2);
+  list-style: none; padding: 0; margin: 0 0 var(--s3);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+  mask-image: linear-gradient(to right, #000 88%, transparent);
+}
+.section-home main ul img {
+  height: 7.5rem; width: auto; max-width: none; display: block;
+  border-radius: var(--r1); border: 1px solid var(--line);
+  background: var(--bg-alt);
+  transition: transform .12s ease;
+}
+.section-home main ul a:hover img { transform: translateY(-2px); }
+
+/* 广播预览里的作品封面：与广播页上的一样，小、浮在左边。 */
+.section-home main p > a[href$=".html"] > img {
+  float: left; width: 3.5rem; max-width: 3.5rem; height: auto;
+  margin: .2em var(--s3) var(--s2) 0;
+  border: 1px solid var(--line); border-radius: 2px; background: var(--bg-alt);
+}
+
+/* 「看全部 N →」是这一行的出口，做成看得见的按钮而不是一句小字。 */
+.section-home main p > a:only-child:not(:has(img)) {
+  display: inline-block; font-size: .9rem; line-height: 1.9;
+  padding: 0 var(--s3); border-radius: 999px;
+  border: 1px solid var(--brand-line); background: var(--brand-soft);
+}
+.section-home main p > a:only-child:not(:has(img)):hover {
+  border-color: var(--brand); text-decoration: none;
+}
+
+/* 媒介一级、状态二级，层次要看得出来。上一条广播预览的封面是浮动的，要清掉。 */
+.section-home main h2 {
+  font-size: 1.25rem; margin-top: var(--s6);
+  padding-top: var(--s4); border-top: 1px solid var(--line);
+  clear: both;
+}
+.section-home main h3 {
+  font-size: .95rem; color: var(--text-dim); margin: var(--s4) 0 var(--s2);
+  clear: both;
+}
+
 /* ── 汇总条 ───────────────────────────────────────────────────── */
 
 .summary {
