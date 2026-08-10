@@ -249,8 +249,19 @@ article img { max-width: 100%; height: auto; border-radius: var(--r2); }
  * 上限，它们就自动排成一排并按宽度换行，不需要任何脚本，也不需要 `:has()`。
  * 每张都链到自己，点开就是原图——缩略是为了能读，不是为了藏起来。
  */
-.section-broadcast .entry p a,
-.section-broadcast article p a { display: inline-block; line-height: 0; }
+/*
+ * **这条只给附图的链接，绝不能罩到封面上。**
+ *
+ * `inline-block` 会自成一个格式化上下文，把里面的浮动**关在链接内部**——于是封面
+ * 浮不到段落左边，只浮到链接左边，而链接前面还站着「玩过」两个字，
+ * 页面上就成了 `玩过 [封面]作品名`，而不是 `[封面] 玩过 作品名`。
+ * 同一条规则里的 `line-height: 0` 还会把链接里的作品名压扁。
+ *
+ * 两个毛病都只在**封面与文字同在一个链接里**时才出现，而那正是上一版刚改成的形状
+ * ——加封面时改了 Markdown，却没想到这条早就写好的样式会跟着罩上来。
+ */
+.section-broadcast .entry p a:not([href$=".html"]),
+.section-broadcast article p a:not([href$=".html"]) { display: inline-block; line-height: 0; }
 .section-broadcast .entry p img,
 .section-broadcast article p img {
   /* 两个上限一起给，**不裁**：图按比例缩到这个框里，一点内容都不少。
