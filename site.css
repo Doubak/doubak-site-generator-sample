@@ -265,18 +265,44 @@ article img { max-width: 100%; height: auto; border-radius: var(--r2); }
   background: var(--bg-alt);
   transition: transform .12s ease;
 }
+/*
+ * 作品封面：「看过 《X》」那一行前面的那张小图，与豆瓣一样。
+ *
+ * **怎么与用户自己发的附图区分开。** 两者在 HTML 里都是 `<p>` 里的 `<a><img>`，
+ * 而该有的大小差着一个数量级。判据用的是**链接指向哪儿**：附图链到图片自己
+ * （`…/uploads/p123.jpg`），封面链到作品页（`…/movie/123.html`）。
+ * 这不是取巧——「图片链到一张图」与「图片链到一个页面」本来就是两件事。
+ *
+ * 代价是它依赖 `uglyURLs`（页面以 `.html` 结尾）。那一条这个主题本来就钉着，
+ * 而且有测试守（关掉它 file:// 下满站断链）。
+ *
+ * 高度用 `2.6em` 而不是固定 px：它要与旁边那行字同高，字变大它跟着变。
+ */
+.section-broadcast .entry p a[href$=".html"] img,
+.section-broadcast article p a[href$=".html"] img {
+  max-height: 2.6em; max-width: 3rem; width: auto;
+  margin: 0 var(--s2) 0 0; vertical-align: -.85em;
+  border: 1px solid var(--line); border-radius: 2px;
+  background: var(--bg-alt);
+}
+.section-broadcast .entry p a[href$=".html"]:hover img,
+.section-broadcast article p a[href$=".html"]:hover img { border-color: var(--brand); }
+
 /* **只有一张图的时候放大些。** 29 条带图广播里 13 条只有一张——那多半是特意
    发的一张照片，缩成缩略图就没什么可看的了。仍然远不到铺满屏幕。 */
-.section-broadcast .entry p a:only-child img,
-.section-broadcast article p a:only-child img { max-height: 22rem; max-width: 100%; }
+/* `:not([href$=".html"])` 是必需的：`<p>看过 <a>…</a></p>` 里那个 `<a>` 也是
+   `:only-child`（文本节点不算兄弟），不排掉的话封面会被放大到 22rem。
+   两条选择器的优先级本来一模一样，后写的赢——而后写的恰好是这条。 */
+.section-broadcast .entry p a:only-child:not([href$=".html"]) img,
+.section-broadcast article p a:only-child:not([href$=".html"]) img { max-height: 22rem; max-width: 100%; }
 .section-broadcast .entry p a:hover img,
 .section-broadcast article p a:hover img { transform: translateY(-2px); }
 
 @media (max-width: 640px) {
   .section-broadcast .entry p img,
   .section-broadcast article p img { max-height: 6rem; max-width: 8rem; }
-  .section-broadcast .entry p a:only-child img,
-  .section-broadcast article p a:only-child img { max-height: 14rem; max-width: 100%; }
+  .section-broadcast .entry p a:only-child:not([href$=".html"]) img,
+  .section-broadcast article p a:only-child:not([href$=".html"]) img { max-height: 14rem; max-width: 100%; }
 }
 
 table { border-collapse: collapse; width: 100%; font-size: .92rem; margin: 0 0 var(--s5); }
