@@ -222,6 +222,17 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
   display: flex; flex-wrap: nowrap; gap: var(--s2);
   list-style: none; padding: 0; margin: 0 0 var(--s3);
   overflow: hidden;
+}
+/*
+ * 右边那道渐隐**只给摆得满的行**。
+ *
+ * 它的意思是「后面还有」，而舞台剧只有 3 部作品——给一行 3 张图也淡出去的话，
+ * 那是在暗示还有没显示出来的东西，而其实一个都没有。**页面不该暗示数据比实际多。**
+ *
+ * 用 `:has(> li:nth-child(10))` 数个数：10 张以上才可能溢出。老浏览器不认 `:has()`
+ * 就是不淡出，只是少一点修饰。
+ */
+.section-home ul:has(> li:nth-child(10)) {
   -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
   mask-image: linear-gradient(to right, #000 88%, transparent);
 }
