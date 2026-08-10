@@ -258,6 +258,10 @@ article img { max-width: 100%; height: auto; border-radius: var(--r2); }
      藏起来。实测这批附图是 1080×607 的截图，缩到 12rem 宽约 4 张一行。 */
   max-height: 9rem; max-width: 12rem; width: auto;
   margin: 0 var(--s2) var(--s2) 0; border-radius: var(--r1);
+  /* 一道浅边。截图多半是浅色底，不给边的话它与页面背景糊在一起，
+     看不出一张图从哪儿到哪儿——尤其是并排放着好几张的时候。
+     用 `--line`（与全站分隔线同一个颜色），深浅两种配色下都是淡的。 */
+  border: 1px solid var(--line);
   background: var(--bg-alt);
   transition: transform .12s ease;
 }
@@ -283,6 +287,26 @@ td:first-child { color: var(--text-dim); white-space: nowrap; width: 1%; }
 /* 「说过什么」的时间线 */
 .entry { border-top: 1px solid var(--line); padding-top: var(--s4); margin-top: var(--s5); }
 .entry:first-of-type { border-top: 0; }
+
+/*
+ * 广播与广播之间也来一道。
+ *
+ * 一个月的广播是连着排下来的一串 `<h3>时间</h3>` 加若干段，条与条之间只靠空白
+ * 隔开——而带图那几条自己就占好几行，读到后面分不清哪张图属于哪条。分隔线让
+ * 「一条广播」有个看得见的边界。
+ *
+ * 两处都要：月页（`article`）与广播首页那条一直往下翻的时间线（`.entry` 里嵌着
+ * 各月的正文）。每一串里的第一条不画线——那道线会贴在月份标题下面，像是标题
+ * 自己的下划线。
+ */
+.section-broadcast article h3,
+.section-broadcast .entry h3 {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s5);
+  margin-top: var(--s5);
+}
+.section-broadcast article h3:first-of-type,
+.section-broadcast .entry h3:first-of-type { border-top: 0; padding-top: 0; }
 h3 + p em, article em { font-style: normal; color: var(--text-dim); font-size: .85rem; }
 
 /* ── 翻页 ─────────────────────────────────────────────────────── */
