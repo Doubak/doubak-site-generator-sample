@@ -280,13 +280,30 @@ article img { max-width: 100%; height: auto; border-radius: var(--r2); }
  */
 .section-broadcast .entry p a[href$=".html"] img,
 .section-broadcast article p a[href$=".html"] img {
-  max-height: 2.6em; max-width: 3rem; width: auto;
-  margin: 0 var(--s2) 0 0; vertical-align: -.85em;
+  /* **浮动到左边**，动作、作品名、正文就自然流在它右边——豆瓣的广播就是这个形状。
+     用 float 而不是 flex：正文与附图是各自独立的 `<p>`，要它们跟封面并排就得有个
+     共同的父元素，而那意味着往正文里塞 HTML（`unsafe = true`），
+     那是往 GitHub Pages 的发布路径上开一个口子。float 不需要改一个字的 Markdown。 */
+  float: left;
+  /* max-height 要显式解掉：上面那条通用规则给了 9rem，海报再瘦一点就会被它压住，
+     而压住的表现是宽度对不上——一排封面里有一两张比别的窄，看着像图坏了。 */
+  width: 3.5rem; max-width: 3.5rem; max-height: none; height: auto;
+  margin: .2em var(--s3) var(--s2) 0;
   border: 1px solid var(--line); border-radius: 2px;
   background: var(--bg-alt);
 }
 .section-broadcast .entry p a[href$=".html"]:hover img,
 .section-broadcast article p a[href$=".html"]:hover img { border-color: var(--brand); }
+
+/*
+ * 自己上传的附图另起一行，不跟在浮动的封面旁边。
+ *
+ * 实测这份档案里「既有作品封面、又有自己上传附图」的广播是 **0 条**，所以这条今天
+ * 一次都不生效。留着是因为「今天恰好没有」不是判据——这个项目从手上的样本推出
+ * 封闭集合已经栽过四次。真出现时不加这条也只是缩略图那一排被封面顶进去一点，
+ * 所以 `:has()` 在老浏览器上不生效也无所谓。
+ */
+.section-broadcast p:has(> a[href$=".jpg"]) { clear: both; }
 
 /* **只有一张图的时候放大些。** 29 条带图广播里 13 条只有一张——那多半是特意
    发的一张照片，缩成缩略图就没什么可看的了。仍然远不到铺满屏幕。 */
@@ -315,6 +332,21 @@ td:first-child { color: var(--text-dim); white-space: nowrap; width: 1%; }
 .entry:first-of-type { border-top: 0; }
 
 /*
+ * 广播首页上，**月与月之间要比条与条之间更重**。
+ *
+ * 原来两者都是同一根 1px 细线，于是「翻过一个月」和「翻过一条广播」在页面上长得
+ * 一模一样——一页 4 个月、上百条广播，读下来根本分不出自己走到哪个月了。
+ * 加粗、换成品牌色、间距翻倍：层级要靠看得出来的差别，不能靠读者去数。
+ */
+.section-broadcast .entry {
+  border-top: 3px solid var(--brand-line);
+  padding-top: var(--s6);
+  margin-top: var(--s6);
+}
+.section-broadcast .entry:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.section-broadcast .entry > h2 { margin-top: 0; font-size: 1.3rem; }
+
+/*
  * 广播与广播之间也来一道。
  *
  * 一个月的广播是连着排下来的一串 `<h3>时间</h3>` 加若干段，条与条之间只靠空白
@@ -330,7 +362,13 @@ td:first-child { color: var(--text-dim); white-space: nowrap; width: 1%; }
   border-top: 1px solid var(--line);
   padding-top: var(--s5);
   margin-top: var(--s5);
+  /* 上一条的封面是浮动的，不清掉的话这条的时间戳会挤到它旁边去。 */
+  clear: both;
 }
+/* 每条广播自成一块，把里面的浮动收住——否则最后一条的封面会漏到月份边界外面。
+   `flow-root` 只是「造一个 BFC」，不像 `overflow: hidden` 那样会裁掉东西。 */
+.section-broadcast article,
+.section-broadcast .entry { display: flow-root; }
 .section-broadcast article h3:first-of-type,
 .section-broadcast .entry h3:first-of-type { border-top: 0; padding-top: 0; }
 h3 + p em, article em { font-style: normal; color: var(--text-dim); font-size: .85rem; }
