@@ -226,7 +226,11 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
   mask-image: linear-gradient(to right, #000 88%, transparent);
 }
 .section-home ul img {
-  height: 7.5rem; width: auto; max-width: none; display: block;
+  /* **每张一样宽。** 用原始比例的话每张宽度都不同，一行下来右边参差不齐，看着
+     像没加载完。与作品网格用同一套（`.grid img` 也是 2:3 + cover）——封面是目录
+     的美术图，原图点一下就能看到，这里要的是整齐。 */
+  height: 7.5rem; width: 5rem; max-width: none; display: block;
+  object-fit: cover; object-position: center top;
   border-radius: var(--r1); border: 1px solid var(--line);
   background: var(--bg-alt);
   transition: transform .12s ease;
@@ -253,7 +257,13 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
 }
 .section-home p:has(> a[href$=".jpg"]) { clear: both; }
 
-/* 「看全部 N →」是这一行的出口，做成看得见的按钮而不是一句小字。 */
+/*
+ * 「看全部 N →」是这一行的出口，做成看得见的按钮而不是一句小字。
+ *
+ * **整段要 `clear`**：广播预览里的封面是浮动的，不清的话这个按钮会挤到封面右边，
+ * 与上面所有内容左边对不齐——实测就是这样，看着像缩进错了。
+ */
+.section-home p:has(> a:only-child:not(:has(img))) { clear: both; }
 .section-home p > a:only-child:not(:has(img)) {
   display: inline-block; font-size: .9rem; line-height: 1.9;
   padding: 0 var(--s3); border-radius: 999px;
