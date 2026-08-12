@@ -248,10 +248,17 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
 }
 .section-home ul a:hover img { transform: translateY(-2px); }
 
-/* 广播预览里的作品封面：与广播页上的一样，小、浮在左边。 */
+/*
+ * 广播预览里的作品封面：与广播页上的一样，小、浮在左边。
+ *
+ * **下边距是 `--s4`，与「看全部」那条的上边距同一个值，这是有意对齐的。**
+ * 清浮动之后，元素的上边缘落在浮动的**外边距**下沿，自己的 margin-top 用不上了
+ * ——也就是说这里的 16px 就是按钮离封面的距离。写成别的值，首页上的按钮就会在
+ * 广播那一节离上面近一点、在其余各节远一点，而两处看起来该是一样的。
+ */
 .section-home p > a[href$=".html"] > img {
   float: left; width: 3.5rem; max-width: 3.5rem; height: auto;
-  margin: .2em var(--s3) var(--s2) 0;
+  margin: .2em var(--s3) var(--s4) 0;
   border: 1px solid var(--line); border-radius: 2px; background: var(--bg-alt);
 }
 
@@ -273,14 +280,33 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
  *
  * **整段要 `clear`**：广播预览里的封面是浮动的，不清的话这个按钮会挤到封面右边，
  * 与上面所有内容左边对不齐——实测就是这样，看着像缩进错了。
+ *
+ * ## `:has()` 里不许再套一个 `:has()`
+ *
+ * 这条 clear 原来写作 `p:has(> a:only-child:not(:has(img)))`。规范明令禁止这种嵌套，
+ * 于是**整条选择器非法、被整条丢掉**——CSS 不会报错，只是这一条静悄悄地不存在。
+ * 而下面那条按钮外观写的是 `p > a…:not(:has(img))`：`:has()` 套在 `:not()` 里是
+ * 合法的，它照常生效。结果首页上出现了一个**长得完全正确、位置却错了**的按钮：
+ * 药丸有了，clear 没了，它贴在浮动封面右边，与上面每一行都对不齐。
+ * 判据同样要小心：「有 clear: both 这几个字」是测不出来的，因为它一直都在。
+ *
+ * 修法是把 `:has(img)` 从 `:has()` 内部挪到 `p` 自己身上（`:not(:has())` 在顶层合法），
+ * 并且**让两条规则共用同一个 `p` 判据**——共用之后，这个判据要么两条一起生效、
+ * 要么两条一起失效，不会再出现「一条中一条不中」这种只看得见一半的坏法。
  */
-.section-home p:has(> a:only-child:not(:has(img))) { clear: both; }
-.section-home p > a:only-child:not(:has(img)) {
+.section-home p:not(:has(img)):has(> a:only-child) {
+  clear: both;
+  /* **上边距写死，不跟着上一个元素走。** 这个按钮上面可能是三种东西，各自的下边距
+     都不一样：封面条 `<ul>`（12px）、广播正文 `<p>`（1em）、一个没有封面的
+     `<h3>`（8px）。不写死的话同一个按钮在首页上下会有三种间距。 */
+  margin-top: var(--s4);
+}
+.section-home p:not(:has(img)) > a:only-child {
   display: inline-block; font-size: .9rem; line-height: 1.9;
   padding: 0 var(--s3); border-radius: 999px;
   border: 1px solid var(--brand-line); background: var(--brand-soft);
 }
-.section-home p > a:only-child:not(:has(img)):hover {
+.section-home p:not(:has(img)) > a:only-child:hover {
   border-color: var(--brand); text-decoration: none;
 }
 
