@@ -552,3 +552,12 @@ footer.site .wrap { padding-top: var(--s5); padding-bottom: var(--s5); font-size
   .subject-head img { width: 7rem; }
   header.site .wrap { min-height: 48px; }
 }
+
+/* 私密豆列的锁。目录页与详情页都要有——只在详情页说，等于目录页把私密的和公开的
+   画成一模一样，而目录页恰恰是别人扫一眼的地方。 */
+.lock {
+  margin-left: .35em;
+  font-size: .9em;
+  opacity: .75;
+  cursor: help;
+}
