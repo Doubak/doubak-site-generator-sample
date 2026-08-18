@@ -1,9 +1,17 @@
 name: Sitemap
 
-# Regenerates sitemap.xml on every push to main and commits it back.
+# Regenerates sitemap.xml on every push to main.
 #
-# Pushes made with GITHUB_TOKEN do not trigger workflows, so the commit this
-# job makes cannot re-trigger this job.
+# MODE below decides what happens with the result:
+#   pr    - open (or update) a pull request with the new sitemap, for you to merge
+#   push  - commit it straight to main
+# Switching is a one-word edit; nothing else in this file changes.
+#
+# 'pr' mode needs "Allow GitHub Actions to create and approve pull requests"
+# turned on under Settings > Actions > General > Workflow permissions.
+#
+# Pushes made with GITHUB_TOKEN do not trigger workflows, so neither mode can
+# re-trigger this job.
 #
 # deploy.js keeps .github/ when it re-lays the site, so this workflow survives
 # a regeneration. sitemap.xml itself does not — it is deleted as a leftover and
@@ -18,10 +26,14 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: sitemap
   cancel-in-progress: false
+
+env:
+  MODE: pr
 
 jobs:
   sitemap:
@@ -48,7 +60,25 @@ jobs:
           SITEMAP: ${{ steps.generate.outputs.sitemap-path }}
         run: python3 .github/scripts/fix-sitemap.py "$SITEMAP"
 
+      - name: Open a pull request
+        if: env.MODE == 'pr'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: sitemap.xml
+          branch: chore/sitemap
+          delete-branch: true
+          commit-message: 重新生成 sitemap.xml
+          title: 重新生成 sitemap.xml
+          body: |
+            `${{ github.workflow }}` 跟着 ${{ github.sha }} 重新生成了 sitemap.xml。
+
+            - 收录 ${{ steps.generate.outputs.url-count }} 个 URL（还要减去 `fix-sitemap.py` 去掉的分页壳子，见该次运行的日志）
+            - 因为 `noindex` 被 action 排除的：${{ steps.generate.outputs.excluded-count }} 个
+
+            合并之后下一次 `deploy.js` 推送之前记得先 `git pull`。
+
       - name: Commit and push
+        if: env.MODE == 'push'
         env:
           SITEMAP: ${{ steps.generate.outputs.sitemap-path }}
           BRANCH: ${{ github.ref_name }}

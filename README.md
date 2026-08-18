@@ -5,7 +5,7 @@
 项目主页在 **<https://doubak.com>** —— 那里讲清楚这套东西是什么、怎么用。
 本仓库只是它的一份产出。
 
-这个仓库里除了本文件、`LICENSE` 与 `CNAME`，**其余全部是生成的**，不要手改：下一次生成会把它们清掉重铺。
+这个仓库里除了本文件、`LICENSE`、`CNAME` 与 `.github/`，**其余全部是生成的**，不要手改：下一次生成会把它们清掉重铺。
 
 ## 它是怎么来的
 
@@ -19,6 +19,21 @@ node bin/deploy.js ~/downloads/20260806-canonical ~/downloads/20260806 <这个�
 ```
 
 三步分别在 [doubak-extension](https://github.com/Doubak/doubak-extension)、[doubak-data-parser](https://github.com/Doubak/doubak-data-parser)、[doubak-site-generator](https://github.com/Doubak/doubak-site-generator)。
+
+### sitemap 是 GitHub Actions 自己长出来的
+
+`.github/workflows/sitemap.yml` 在每次推到 `main` 之后重新生成 `sitemap.xml`，
+默认开一个 PR 让你合（把文件顶上的 `MODE` 从 `pr` 改成 `push` 就直接提交到
+`main`）。生成用 [cicirello/generate-sitemap](https://github.com/cicirello/generate-sitemap)，
+之后再过一遍 `.github/scripts/fix-sitemap.py`：去掉分页的「第 1 页」跳转壳子
+（那是 meta refresh，不是页面），并把中日文 tag 路径按 RFC 3986 转义。
+
+`deploy.js` 重铺站点时保留 `.github/`，所以这套东西不会被清掉；`sitemap.xml`
+会被当成上次的残留删掉，再由这次部署推送触发的运行重新生成。
+
+**所以下一次 `deploy.js` 之前要先 `git pull`。** sitemap 是在 GitHub 上提交的，
+本地仓库没有那一笔，不拉下来的话推送会被拒（non-fast-forward）。这是「让机器
+自动提交」换来的，不是出了问题。
 
 ## 这份示例里有什么
 
