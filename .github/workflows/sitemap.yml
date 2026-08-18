@@ -1,0 +1,74 @@
+name: Sitemap
+
+# Regenerates sitemap.xml on every push to main and commits it back.
+#
+# Pushes made with GITHUB_TOKEN do not trigger workflows, so the commit this
+# job makes cannot re-trigger this job.
+#
+# deploy.js keeps .github/ when it re-lays the site, so this workflow survives
+# a regeneration. sitemap.xml itself does not — it is deleted as a leftover and
+# rewritten by the run that the deploy push kicks off.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'sitemap.xml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sitemap
+  cancel-in-progress: false
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # generate-sitemap derives each <lastmod> from `git log -1` on the
+          # file, and falls back to "now" for anything it cannot find, so it
+          # needs the full history rather than a shallow clone.
+          fetch-depth: 0
+
+      - name: Generate sitemap
+        id: generate
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://sample.doubak.com/
+          # The site has no PDFs; skip the scan for them.
+          include-pdf: false
+
+      - name: Fix up the sitemap
+        env:
+          SITEMAP: ${{ steps.generate.outputs.sitemap-path }}
+        run: python3 .github/scripts/fix-sitemap.py "$SITEMAP"
+
+      - name: Commit and push
+        env:
+          SITEMAP: ${{ steps.generate.outputs.sitemap-path }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git add -- "$SITEMAP"
+          if git diff --cached --quiet; then
+            echo "Sitemap unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m '重新生成 sitemap.xml'
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:$BRANCH"; then
+              exit 0
+            fi
+            echo "Push failed (attempt $attempt); rebasing onto origin/$BRANCH and retrying."
+            sleep $((attempt * 3))
+            git pull --rebase origin "$BRANCH"
+          done
+          echo "Could not push the sitemap after 3 attempts." >&2
+          exit 1
