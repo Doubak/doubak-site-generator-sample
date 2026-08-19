@@ -22,10 +22,10 @@ needs two adjustments it cannot express through the action's own inputs:
 Usage: fix-sitemap.py <path-to-sitemap>
 """
 
-import html
 import re
 import sys
-from urllib.parse import quote, urlsplit, urlunsplit
+from urllib.parse import quote
+from xml.sax.saxutils import unescape
 
 # `/page/1.html` is the stub itself; `/page/1/` is what an `index.html` stub
 # becomes once generate-sitemap rewrites it to a directory URL. The anchor
@@ -35,15 +35,38 @@ STUB = re.compile(r"/page/1(?:\.html|/)$")
 URL_BLOCK = re.compile(r"<url>\s*<loc>(.*?)</loc>.*?</url>\s*", re.DOTALL)
 
 # Every character RFC 3986 allows in a path, minus the five XML markup
-# characters. Leaving those to be percent-encoded means the result never needs
-# XML escaping on the way back into the document.
+# characters and `%`.
+#
+# Dropping the markup characters means anything that would need XML escaping
+# gets percent-encoded instead, so the result is safe to drop straight back
+# into the document without re-escaping.
+#
+# Dropping `%` means a literal percent in a filename becomes `%25`, which is
+# what it must be. That is only correct because generate-sitemap writes
+# filenames verbatim and never percent-encodes anything itself, so nothing
+# reaching this script is already encoded. It does mean the script is not
+# idempotent: it runs once, on freshly generated output.
 PATH_SAFE = "/-._~!$()*+,;=:@"
+
+# Scheme and authority of a <loc>. Everything after it is the path, including
+# any `?` or `#`, which in a static file archive are characters in a filename
+# rather than query or fragment delimiters — and so must be encoded, not
+# treated as structure.
+ORIGIN = re.compile(r"[a-z][a-z0-9+.-]*://[^/]*", re.I)
+
+# generate-sitemap XML-escapes filenames on the way in, so undo that before
+# percent-encoding. saxutils handles exactly the five XML entities (and does
+# `&amp;` last, so a filename containing the literal text "&amp;" survives).
+XML_ENTITIES = {"&apos;": "'", "&quot;": '"'}
 
 
 def encode(url):
-    """Percent-encode the path of an already XML-escaped URL."""
-    parts = urlsplit(html.unescape(url))
-    return urlunsplit(parts._replace(path=quote(parts.path, safe=PATH_SAFE)))
+    """Percent-encode everything after the host of an XML-escaped <loc>."""
+    url = unescape(url, XML_ENTITIES)
+    origin = ORIGIN.match(url)
+    if origin is None:
+        return url
+    return origin.group(0) + quote(url[origin.end():], safe=PATH_SAFE)
 
 
 def main(path):

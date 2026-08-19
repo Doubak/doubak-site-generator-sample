@@ -64,7 +64,7 @@ jobs:
         if: env.MODE == 'pr'
         uses: peter-evans/create-pull-request@v8
         with:
-          add-paths: sitemap.xml
+          add-paths: ${{ steps.generate.outputs.sitemap-path }}
           branch: chore/sitemap
           delete-branch: true
           commit-message: 重新生成 sitemap.xml
