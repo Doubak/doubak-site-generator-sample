@@ -202,6 +202,64 @@ class TestMain(unittest.TestCase):
         self.assertEqual(self.run_on(once), once)
 
 
+class TestStepOutputs(unittest.TestCase):
+    """What the workflow quotes in the pull request it opens.
+
+    generate-sitemap's own `url-count` is the count *before* pruning, so the
+    PR body has to use these instead or it advertises a number the file does
+    not contain.
+    """
+
+    def setUp(self):
+        self.dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.dir)
+        self.path = os.path.join(self.dir, "sitemap.xml")
+        self.output = os.path.join(self.dir, "github_output")
+
+    def run_on(self, content, with_output=True):
+        with open(self.path, "w", encoding="utf-8") as f:
+            f.write(content)
+        env = {"GITHUB_OUTPUT": self.output} if with_output else {}
+        with unittest.mock.patch.dict(os.environ, env, clear=not with_output):
+            if not with_output:
+                os.environ.pop("GITHUB_OUTPUT", None)
+            with contextlib.redirect_stdout(io.StringIO()):
+                fix_sitemap.main(self.path)
+
+    def outputs(self):
+        with open(self.output, encoding="utf-8") as f:
+            return dict(line.strip().split("=", 1) for line in f if line.strip())
+
+    def test_reports_counts_after_pruning_not_before(self):
+        self.run_on(sitemap(
+            BASE,
+            BASE + "book/page/1/",          # stub, dropped
+            BASE + "tags/一战.html",         # encoded
+            BASE + "broadcast/page/10.html",
+        ))
+        self.assertEqual(self.outputs(), {
+            "url-count": "3", "dropped-count": "1", "encoded-count": "1"})
+
+    def test_reports_zeroes_for_a_sitemap_with_no_entries(self):
+        # The workflow interpolates these unconditionally, so they must exist
+        # even on the path that leaves the file alone.
+        self.run_on(sitemap())
+        self.assertEqual(self.outputs(), {
+            "url-count": "0", "dropped-count": "0", "encoded-count": "0"})
+
+    def test_appends_rather_than_truncating(self):
+        with open(self.output, "w", encoding="utf-8") as f:
+            f.write("sitemap-path=./sitemap.xml\n")
+        self.run_on(sitemap(BASE))
+        self.assertEqual(self.outputs().get("sitemap-path"), "./sitemap.xml")
+
+    def test_works_when_run_by_hand_outside_actions(self):
+        self.run_on(sitemap(BASE + "tags/一战.html"), with_output=False)
+        self.assertFalse(os.path.exists(self.output))
+        with open(self.path, encoding="utf-8") as f:
+            self.assertIn("%E4%B8%80%E6%88%98", f.read())
+
+
 class TestAtomicWrite(unittest.TestCase):
     """How the sitemap gets written back.
 
