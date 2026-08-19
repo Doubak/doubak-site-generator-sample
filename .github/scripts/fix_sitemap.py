@@ -19,7 +19,7 @@ needs two adjustments it cannot express through the action's own inputs:
    requires RFC 3986 escaping. The escaped form addresses exactly the same
    file, and validators stop complaining.
 
-Usage: fix-sitemap.py <path-to-sitemap>
+Usage: fix_sitemap.py <path-to-sitemap>
 """
 
 import re

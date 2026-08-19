@@ -58,7 +58,7 @@ jobs:
       - name: Fix up the sitemap
         env:
           SITEMAP: ${{ steps.generate.outputs.sitemap-path }}
-        run: python3 .github/scripts/fix-sitemap.py "$SITEMAP"
+        run: python3 .github/scripts/fix_sitemap.py "$SITEMAP"
 
       - name: Open a pull request
         if: env.MODE == 'pr'
@@ -72,7 +72,7 @@ jobs:
           body: |
             `${{ github.workflow }}` 跟着 ${{ github.sha }} 重新生成了 sitemap.xml。
 
-            - 收录 ${{ steps.generate.outputs.url-count }} 个 URL（还要减去 `fix-sitemap.py` 去掉的分页壳子，见该次运行的日志）
+            - 收录 ${{ steps.generate.outputs.url-count }} 个 URL（还要减去 `fix_sitemap.py` 去掉的分页壳子，见该次运行的日志）
             - 因为 `noindex` 被 action 排除的：${{ steps.generate.outputs.excluded-count }} 个
 
             合并之后下一次 `deploy.js` 推送之前记得先 `git pull`。
