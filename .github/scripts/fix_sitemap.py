@@ -22,8 +22,10 @@ needs two adjustments it cannot express through the action's own inputs:
 Usage: fix_sitemap.py <path-to-sitemap>
 """
 
+import os
 import re
 import sys
+import tempfile
 from urllib.parse import quote
 from xml.sax.saxutils import unescape
 
@@ -69,6 +71,32 @@ def encode(url):
     return origin.group(0) + quote(url[origin.end():], safe=PATH_SAFE)
 
 
+def write_atomically(path, content):
+    """Replace `path` with `content` without opening `path` for writing.
+
+    generate-sitemap is a Docker action and its container runs as root, so the
+    sitemap it leaves in the workspace is owned by root:root while every later
+    step runs as the unprivileged `runner` user. Opening that file "w" fails
+    with EACCES. Writing a sibling file and renaming over it needs permission
+    on the *directory* instead, which the runner has — and it makes the
+    replacement atomic, so a crash mid-write cannot leave a truncated sitemap.
+    """
+    directory = os.path.dirname(os.path.abspath(path))
+    tmp = tempfile.NamedTemporaryFile(
+        "w", encoding="utf-8", dir=directory,
+        prefix=".sitemap-", suffix=".tmp", delete=False)
+    try:
+        with tmp:
+            tmp.write(content)
+        # NamedTemporaryFile creates with 0600; the sitemap is a public file
+        # served to crawlers, so give it the mode the generator would have.
+        os.chmod(tmp.name, 0o644)
+        os.replace(tmp.name, path)
+    except BaseException:
+        os.unlink(tmp.name)
+        raise
+
+
 def main(path):
     with open(path, encoding="utf-8") as f:
         sitemap = f.read()
@@ -94,8 +122,7 @@ def main(path):
         print(f"WARNING: no <url> entries found in {path}; leaving it as is.")
         return 0
 
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(fixed_sitemap)
+    write_atomically(path, fixed_sitemap)
 
     print(
         f"Dropped {dropped} paginator redirect stubs, "
