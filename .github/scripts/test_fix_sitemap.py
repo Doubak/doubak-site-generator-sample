@@ -9,10 +9,12 @@ Stdlib only, no dependencies to install:
 import contextlib
 import io
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 import xml.etree.ElementTree as ET
 from urllib.parse import unquote
 
@@ -198,6 +200,55 @@ class TestMain(unittest.TestCase):
     def test_is_idempotent_for_urls_needing_no_change(self):
         once = self.run_on(sitemap(BASE, BASE + "movie/10001418.html"))
         self.assertEqual(self.run_on(once), once)
+
+
+class TestAtomicWrite(unittest.TestCase):
+    """How the sitemap gets written back.
+
+    generate-sitemap runs as root inside a Docker action, so the file it
+    leaves in the workspace is owned by root while the step that fixes it up
+    runs as an unprivileged user. Opening that file for writing is EACCES —
+    it has to be replaced, not written into.
+    """
+
+    def setUp(self):
+        self.dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.dir)
+        self.path = os.path.join(self.dir, "sitemap.xml")
+        with open(self.path, "w", encoding="utf-8") as f:
+            f.write(sitemap(BASE + "tags/一战.html"))
+
+    def run_fix(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            fix_sitemap.main(self.path)
+
+    def test_replaces_the_file_rather_than_writing_into_it(self):
+        before = os.stat(self.path).st_ino
+        self.run_fix()
+        self.assertNotEqual(os.stat(self.path).st_ino, before)
+
+    @unittest.skipIf(os.geteuid() == 0, "root bypasses file permissions")
+    def test_rewrites_a_sitemap_it_has_no_write_permission_on(self):
+        os.chmod(self.path, 0o444)
+        self.run_fix()
+        with open(self.path, encoding="utf-8") as f:
+            self.assertIn("%E4%B8%80%E6%88%98", f.read())
+
+    def test_leaves_the_replacement_world_readable(self):
+        self.run_fix()
+        self.assertEqual(os.stat(self.path).st_mode & 0o777, 0o644)
+
+    def test_leaves_no_temporary_files_behind(self):
+        self.run_fix()
+        self.assertEqual(os.listdir(self.dir), ["sitemap.xml"])
+
+    def test_cleans_up_and_keeps_the_original_when_the_write_fails(self):
+        original = open(self.path, encoding="utf-8").read()
+        with unittest.mock.patch("os.replace", side_effect=OSError("boom")):
+            with self.assertRaises(OSError):
+                self.run_fix()
+        self.assertEqual(os.listdir(self.dir), ["sitemap.xml"])
+        self.assertEqual(open(self.path, encoding="utf-8").read(), original)
 
 
 class TestCommandLine(unittest.TestCase):
