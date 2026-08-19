@@ -222,6 +222,10 @@ class TestAtomicWrite(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()):
             fix_sitemap.main(self.path)
 
+    def read(self):
+        with open(self.path, encoding="utf-8") as f:
+            return f.read()
+
     def test_replaces_the_file_rather_than_writing_into_it(self):
         before = os.stat(self.path).st_ino
         self.run_fix()
@@ -231,8 +235,7 @@ class TestAtomicWrite(unittest.TestCase):
     def test_rewrites_a_sitemap_it_has_no_write_permission_on(self):
         os.chmod(self.path, 0o444)
         self.run_fix()
-        with open(self.path, encoding="utf-8") as f:
-            self.assertIn("%E4%B8%80%E6%88%98", f.read())
+        self.assertIn("%E4%B8%80%E6%88%98", self.read())
 
     def test_leaves_the_replacement_world_readable(self):
         self.run_fix()
@@ -243,12 +246,12 @@ class TestAtomicWrite(unittest.TestCase):
         self.assertEqual(os.listdir(self.dir), ["sitemap.xml"])
 
     def test_cleans_up_and_keeps_the_original_when_the_write_fails(self):
-        original = open(self.path, encoding="utf-8").read()
+        original = self.read()
         with unittest.mock.patch("os.replace", side_effect=OSError("boom")):
             with self.assertRaises(OSError):
                 self.run_fix()
         self.assertEqual(os.listdir(self.dir), ["sitemap.xml"])
-        self.assertEqual(open(self.path, encoding="utf-8").read(), original)
+        self.assertEqual(self.read(), original)
 
 
 class TestCommandLine(unittest.TestCase):
