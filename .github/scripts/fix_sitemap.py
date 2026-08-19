@@ -97,6 +97,23 @@ def write_atomically(path, content):
         raise
 
 
+def set_output(**values):
+    """Publish step outputs when running inside GitHub Actions.
+
+    The workflow quotes these in the pull request it opens, so they have to be
+    the counts *after* pruning — generate-sitemap's own `url-count` is taken
+    before this script removes the paginator stubs. Outside Actions
+    GITHUB_OUTPUT is unset and this is a no-op, so the script still runs by
+    hand.
+    """
+    path = os.environ.get("GITHUB_OUTPUT")
+    if not path:
+        return
+    with open(path, "a", encoding="utf-8") as f:
+        for name, value in values.items():
+            f.write(f"{name.replace('_', '-')}={value}\n")
+
+
 def main(path):
     with open(path, encoding="utf-8") as f:
         sitemap = f.read()
@@ -120,10 +137,13 @@ def main(path):
 
     if seen == 0:
         print(f"WARNING: no <url> entries found in {path}; leaving it as is.")
+        set_output(url_count=0, dropped_count=0, encoded_count=0)
         return 0
 
     write_atomically(path, fixed_sitemap)
 
+    set_output(url_count=seen - dropped, dropped_count=dropped,
+               encoded_count=encoded)
     print(
         f"Dropped {dropped} paginator redirect stubs, "
         f"percent-encoded {encoded} URLs, "
