@@ -1,0 +1,29 @@
+name: Test scripts
+
+# .github/scripts/ is the only hand-written code in this repository, so it is
+# the only thing worth a test run. Everything else here is generated.
+
+on:
+  push:
+    paths:
+      - '.github/scripts/**'
+      - '.github/workflows/test-scripts.yml'
+  pull_request:
+    paths:
+      - '.github/scripts/**'
+      - '.github/workflows/test-scripts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      # Stdlib unittest only — nothing to install.
+      - run: python3 .github/scripts/test_fix_sitemap.py
