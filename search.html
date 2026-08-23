@@ -61,34 +61,7 @@
 <p id="stat" class="dim"></p>
 <div id="out"></div>
 
-<style> 
-.searchbox { margin: 1.4rem 0 .6rem; }
-#q {
-  width: 100%; padding: .6rem .8rem; font: inherit;
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--line); border-radius: 4px;
-}
-#q:focus { outline: 2px solid var(--brand); outline-offset: -1px; }
-#q:disabled { opacity: .6; }
-.idx { display: flex; align-items: center; gap: .5rem; margin: .5rem 0 0; font-size: .85rem; }
-.idx .bar {
-  display: none; width: 7rem; height: 3px; border-radius: 2px;
-  background: var(--line); overflow: hidden;
-}
-.idx-loading .bar { display: inline-block; }
-.idx-loading .bar span {
-  display: block; width: 40%; height: 100%; background: var(--brand);
-  animation: slide 1.1s ease-in-out infinite;
-}
-@keyframes slide { 0% { margin-left: -40%; } 100% { margin-left: 100%; } }
-.idx-ready::before { content: "✓"; color: var(--brand); font-weight: 600; }
-.idx-error::before { content: "⚠"; }
-.hit { border-top: 1px solid var(--line); padding: .9rem 0; }
-.hit a { text-decoration: none; font-weight: 600; }
-.hit .meta { font-size: .82rem; color: var(--text-dim); margin-top: .15rem; }
-.hit .snip { margin-top: .35rem; }
-.hit mark { background: var(--hl); color: var(--hl-text); border-radius: 2px; padding: 0 .1em; }
-</style>
+
 
 <script>
 (function () {
@@ -120,6 +93,20 @@
       + esc(s.slice(j + lq.length));
   }
 
+  
+  
+  
+  
+  function highlight(text, lq) {
+    var s = String(text), lower = s.toLowerCase(), html = '', from = 0, i;
+    if (!lq) return esc(s);
+    while ((i = lower.indexOf(lq, from)) >= 0) {
+      html += esc(s.slice(from, i)) + '<mark>' + esc(s.slice(i, i + lq.length)) + '</mark>';
+      from = i + lq.length;
+    }
+    return html + esc(s.slice(from));
+  }
+
   function run() {
     var raw = q.value.trim();
     if (!rows || !raw) { out.innerHTML = ''; stat.textContent = ''; return; }
@@ -149,6 +136,10 @@
     for (var k = 0; k < Math.min(hits.length, 200); k++) {
       var h = hits[k], d = h.r;
       var title = d.n || (d.t === 'b' ? '广播' : '未知作品');
+      
+      
+      
+      var titleHtml = d.n ? highlight(d.n, lq) : esc(title);
       var where = KIND[d.t] + (d.k ? ' · ' + (NAMES[d.k] || d.k) : '');
       
       
@@ -156,7 +147,7 @@
         ? '<div class="snip">' + snippet(d.w, lq) + '</div>' : '';
       var hitAlias = d.a && d.a.join(' ').toLowerCase().indexOf(lq) >= 0
         ? '<div class="snip">' + snippet(d.a.join(' / '), lq) + '</div>' : '';
-      html += '<div class="hit"><a href="' + esc(d.u) + '.html">' + esc(title) + '</a>'
+      html += '<div class="hit"><a href="' + esc(d.u) + '.html">' + titleHtml + '</a>'
         + '<div class="meta">' + esc(where) + (d.d ? ' · ' + esc(d.d) : '') + '</div>'
         + hitAlias
         + hitInfo
