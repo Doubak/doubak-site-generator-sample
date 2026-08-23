@@ -1,5 +1,7 @@
 # doubak-site-generator-sample
 
+[![test-scripts](https://github.com/Doubak/doubak-site-generator-sample/actions/workflows/test-scripts.yml/badge.svg?branch=main)](https://github.com/Doubak/doubak-site-generator-sample/actions/workflows/test-scripts.yml?query=branch%3Amain)
+
 [**sample.doubak.com**](https://sample.doubak.com) —— 豆备 (Doubak) 生成的示例站点，数据是我自己的豆瓣账号。
 
 项目主页在 **<https://doubak.com>** —— 那里讲清楚这套东西是什么、怎么用。
