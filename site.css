@@ -21,6 +21,10 @@
 :root {
   color-scheme: light dark;
 
+  /* 站外链接角标。方框 + 斜箭头，用 mask 上色所以跟着 currentColor 走。
+     与 doubak.com 的 --icon-external 是同一份，两处要一起改。 */
+  --icon-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13.5 4H20v6.5'/%3E%3Cpath d='M20 4 11 13'/%3E%3Cpath d='M17 14.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4.5'/%3E%3C/svg%3E");
+
   /* ── 豆瓣绿 */
   --brand: #007722;
   --brand-bright: #41ac52;
@@ -590,4 +594,29 @@ footer.site .wrap { padding-top: var(--s5); padding-bottom: var(--s5); font-size
   font-size: .9em;
   opacity: .75;
   cursor: help;
+}
+
+/* ── 站外链接带一个「↗」角标
+ *
+ * **这个站点是离线的，站外链接是例外，所以要看得出来。** 点进去会离开这份存档，
+ * 而存档里其余每一个链接都不会——两者长得一样的话，读者没法在点之前分辨。
+ *
+ * 判据是 `href` 以 http 开头，不是某个 class：内容是 Markdown 生成的，正文里
+ * 没有地方挂 class，而**能挂 class 的地方恰恰是最不需要它的地方**。
+ *
+ * 图标是 `data:` URI + CSS mask，不发任何请求（页脚那句话说的就是这个），
+ * 颜色跟着 currentColor 走，所以深色模式不用另写一份。
+ *
+ * 图片链接不加：附图本来就是链到原图的，每张图右下角挂个箭头只是噪音。
+ */
+a[href^="http"]:not(:has(img))::after {
+  content: "";
+  display: inline-block;
+  width: .62em;
+  height: .62em;
+  margin-left: .28em;
+  vertical-align: -.01em;
+  background-color: currentColor;
+  -webkit-mask: var(--icon-external) no-repeat center / contain;
+  mask: var(--icon-external) no-repeat center / contain;
 }
