@@ -620,3 +620,29 @@ a[href^="http"]:not(:has(img))::after {
   -webkit-mask: var(--icon-external) no-repeat center / contain;
   mask: var(--icon-external) no-repeat center / contain;
 }
+
+/* ── 广播的出处：时间戳下面那一行「豆瓣原页」缩成一个角标（只在广播页）
+ *
+ * **文字留在 HTML 里**（读屏器要念得出这个链接去哪儿；空链接文字与「图片链接
+ * alt 留空」是同一条），只是视觉上收成一个箭头。`font-size: 0` 把文字收掉，
+ * 图标因此不能用 em —— 用 rem，不跟着塌成 0。
+ *
+ * 选择器认的是**位置**：时间戳标题紧跟着的、整段只有一个站外链接的那一段。
+ * 正文是 Markdown 生成的，没地方挂 class；而能挂 class 的地方恰恰不需要它。
+ *
+ * 往上收一点，视觉上贴着时间戳，而不是自成一行占掉一行高度。
+ */
+.section-broadcast h3 + p > a[href^="http"]:only-child {
+  font-size: 0;
+  line-height: 0;
+  display: inline-block;
+  margin-top: -.9em;
+  opacity: .45;
+}
+.section-broadcast h3 + p:has(> a[href^="http"]:only-child) { margin: 0; }
+.section-broadcast h3 + p > a[href^="http"]:only-child::after {
+  width: .78rem;
+  height: .78rem;
+  margin-left: 0;
+}
+.section-broadcast h3 + p > a[href^="http"]:only-child:hover { opacity: 1; }
