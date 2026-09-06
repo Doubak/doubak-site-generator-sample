@@ -25,6 +25,14 @@
      与 doubak.com 的 --icon-external 是同一份，两处要一起改。 */
   --icon-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13.5 4H20v6.5'/%3E%3Cpath d='M20 4 11 13'/%3E%3Cpath d='M17 14.5V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4.5'/%3E%3C/svg%3E");
 
+  /* 豆瓣的「豆」标，只出现在**指向豆瓣的出口**上（广播的出处角标）。
+     与下面 `header.site .home::before` 那条「不用豆瓣的商标」不矛盾，两者说的是
+     两件事：站点自己的标识不能借豆瓣的标（那是冒充），而一个**指路牌**上画着
+     目的地的标，正是它该画的东西——读者在点之前就知道会去哪儿。
+     原图 32×32 PNG（optipng -o7 后 296 字节），内联成 data: URI 与上面那枚
+     角标同一处，所以页脚那句「这个页面也不发一个外部请求」照旧成立。 */
+  --icon-douban: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAASFBMVEUAdxEAdxEAdxEAdxEAdxEAdxEKfBochisgiC8njDVkrG5ws3qAu4iJwJGw1bW42b252r7Q5tPS59XY6tvg7uLi8OT4+/j///92m6jnAAAABXRSTlNJSuTm5/uA3x0AAACKSURBVDjLxZPJDsMgDAVJyUuapNmX+f8/7YEeUkGhVZA6pyd5JFvYGGMVwZp4XbJGCb4TNoJsGYXrQ0qz32D+WVgfJ9aAMJw7D/8RkkNefAdphP3+YofR20ULNC42QOsJNdC52AG1v80FJpcmWALr7uGoJKk6oH8X+EBGIcdNRoTE5y1NUcbqt+IJO/gpSCBTDJgAAAAASUVORK5CYII=");
+
   /* ── 豆瓣绿 */
   --brand: #007722;
   --brand-bright: #41ac52;
@@ -137,7 +145,9 @@ header.site .home {
 header.site .home a { color: inherit; }
 header.site .home a:hover { text-decoration: none; }
 header.site .home::before {
-  /* 一枚小方块当标识。**不用豆瓣的商标**——像它的配色可以，用它的标记不行。 */
+  /* 一枚小方块当标识。**不用豆瓣的商标**——像它的配色可以，用它的标记不行。
+     （站外出口上那枚豆瓣标是另一回事，见 `--icon-douban`：那里画的是目的地，
+     这里画的是这个站点自己。） */
   content: ""; width: 16px; height: 16px; border-radius: 4px;
   background: var(--brand-bright);
 }
@@ -508,6 +518,19 @@ td:first-child { color: var(--text-dim); white-space: nowrap; width: 1%; }
   margin-top: var(--s5);
   /* 上一条的封面是浮动的，不清掉的话这条的时间戳会挤到它旁边去。 */
   clear: both;
+  /*
+   * **下外边距归零，为的是让下面那枚出处角标的位置算得死。**
+   *
+   * 角标是「往上提一行」提回时间戳那一行的（见文件末尾那一段）。提多少，取决于
+   * 标题的下外边距与出处那一段的上外边距**折叠之后**是多少——而那一段是个高度
+   * 为 0 的空块（里面只有一个浮动），外边距会连着后面那一段一起折叠，折叠结果
+   * 取哪一个是要去查规范的。两边都写 0，就没有可折叠的东西，提的距离正好是
+   * 一行。
+   *
+   * 视觉上这是**零改动**：紧跟着的正文段落自带 1em(16px) 上外边距，本来就压过
+   * 这里的 8px，折叠后两种写法都是 16px。
+   */
+  margin-bottom: 0;
 }
 /* 每条广播自成一块，把里面的浮动收住——否则最后一条的封面会漏到月份边界外面。
    `flow-root` 只是「造一个 BFC」，不像 `overflow: hidden` 那样会裁掉东西。 */
@@ -621,28 +644,73 @@ a[href^="http"]:not(:has(img))::after {
   mask: var(--icon-external) no-repeat center / contain;
 }
 
-/* ── 广播的出处：时间戳下面那一行「豆瓣原页」缩成一个角标（只在广播页）
+/* ── 广播的出处：时间戳右端的一枚角标（只在广播页）
+ *
+ * 一条广播长这样：
+ *
+ *     <h3 id="2021-11-28-202521">2021-11-28 20:25:21</h3>      ← 锚点靠它
+ *     <p><a href="…/status/…" title="…">豆瓣原页</a></p>        ← 出处，这一段
+ *     <p>上传了1张照片到 …</p>                                  ← 正文
  *
  * **文字留在 HTML 里**（读屏器要念得出这个链接去哪儿；空链接文字与「图片链接
- * alt 留空」是同一条），只是视觉上收成一个箭头。`font-size: 0` 把文字收掉，
- * 图标因此不能用 em —— 用 rem，不跟着塌成 0。
+ * alt 留空」是同一条），只是视觉上收成一枚豆瓣标 + 站外角标，浮到时间戳那一行
+ * 的最右端。`font-size: 0` 把文字收掉，图标因此不能用 em —— 用 rem，不跟着塌成 0。
  *
- * 选择器认的是**位置**：时间戳标题紧跟着的、整段只有一个站外链接的那一段。
- * 正文是 Markdown 生成的，没地方挂 class；而能挂 class 的地方恰恰不需要它。
+ * ## 为什么不做成标题自己的链接
  *
- * 往上收一点，视觉上贴着时间戳，而不是自成一行占掉一行高度。
+ * 生成器那边写着（`markdown.js` 的 `broadcastBlock`）：**锚点是 SSG 从标题文字
+ * 生成的**，往标题里塞四个字，站内所有指向某条广播的固定链接当场全断。所以
+ * Markdown 里它只能是紧跟在标题后面的独立一段，**由这里把它挪回那一行**——
+ * 版式是主题的事。
+ *
+ * ## 判据是 `title`，不是「整段只有一个站外链接」
+ *
+ * 后者是个**代理**：它与「这一段是出处」只在「没有别的段落长这样」时等价。
+ * 实测这份档案有 3 段正文整段只是一个裸链接（Goldmark 的 linkify 会自动把它
+ * 变成 `<a>`），同时有 10 条广播没有出处——今天两组没撞上，撞上的那天，用户
+ * 写的那句话会被当成出处收成一枚图标，正文静默消失。
+ *
+ * `title` 由生成器写死（`SOURCE_LINK_TITLE`），而 linkify 自动生成的链接永远
+ * 没有 title，判据因此是精确的。仍然带上 `h3 + p` 与 `:only-child`：位置是这条
+ * 版式规则真正依赖的东西（要提回上一行，它就必须紧跟着标题）。
+ *
+ * ## 那个上提的距离
+ *
+ * 浮动 + 负的上外边距，提「一行」的高度。一行 = 标题的 font-size(1rem) ×
+ * body 的 line-height(1.7)。标题的下外边距在上面已经归零、这一段的外边距也归零，
+ * 所以这一段的顶就贴着标题的底，提 1.7rem 正好落回标题的内容顶端；再把这一块
+ * 撑成一行高、里面居中，两枚图标就落在时间戳的中线上。
+ *
+ * `float` 而不是负 margin 硬顶：浮动脱离常规流，那一段因此不占高度——用户看到
+ * 的「白白占掉一整行」正是它以前还在流里造出来的那个行框。外面的 `article`
+ * 已经是 `flow-root`，浮动漏不出去；下一条广播的 `h3` 带着 `clear: both`。
  */
-.section-broadcast h3 + p > a[href^="http"]:only-child {
+.section-broadcast h3 + p:has(> a[href^="http"][title]:only-child) { margin: 0; }
+.section-broadcast h3 + p > a[href^="http"][title]:only-child {
+  /* 时间戳那一行的高度。改 body 的 line-height 就要跟着改这里。 */
+  --stamp-line: 1.7rem;
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  height: var(--stamp-line);
+  margin-top: calc(-1 * var(--stamp-line));
   font-size: 0;
   line-height: 0;
-  display: inline-block;
-  margin-top: -.9em;
-  opacity: .45;
+  opacity: .5;
 }
-.section-broadcast h3 + p:has(> a[href^="http"]:only-child) { margin: 0; }
-.section-broadcast h3 + p > a[href^="http"]:only-child::after {
-  width: .78rem;
-  height: .78rem;
-  margin-left: 0;
+/* 豆瓣标。`flex: none` 是必须的：flex 项默认可以被压扁，而这是一张图不是一段字。 */
+.section-broadcast h3 + p > a[href^="http"][title]:only-child::before {
+  content: "";
+  flex: none;
+  width: .82rem;
+  height: .82rem;
+  background: var(--icon-douban) no-repeat center / contain;
 }
-.section-broadcast h3 + p > a[href^="http"]:only-child:hover { opacity: 1; }
+/* 站外角标。尺寸与间距全部换成 rem —— 全局那条用的是 em，在这里会塌成 0。 */
+.section-broadcast h3 + p > a[href^="http"][title]:only-child::after {
+  flex: none;
+  width: .62rem;
+  height: .62rem;
+  margin-left: .2rem;
+}
+.section-broadcast h3 + p > a[href^="http"][title]:only-child:hover { opacity: 1; }
