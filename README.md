@@ -14,10 +14,10 @@
 ```sh
 # 1. 浏览器扩展在自己的浏览器里抓，产出 bundle（WARC + 索引 + 清单）
 # 2. bundle → canonical（结构化、带修订历史）
-node bin/parse.js  ~/downloads/20260806 ~/downloads/20260806-canonical
+node bin/parse.js  ~/downloads/exports ~/downloads/canonical
 
 # 3. canonical + bundle → 这个仓库
-node bin/deploy.js ~/downloads/20260806-canonical ~/downloads/20260806 <这个目录>
+node bin/deploy.js ~/downloads/canonical ~/downloads/exports <这个目录>
 ```
 
 三步分别在 [doubak-extension](https://github.com/Doubak/doubak-extension)、[doubak-data-parser](https://github.com/Doubak/doubak-data-parser)、[doubak-site-generator](https://github.com/Doubak/doubak-site-generator)。
