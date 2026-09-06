@@ -319,19 +319,28 @@ h3 { font-size: 1rem; margin: var(--s5) 0 var(--s2); font-weight: 600; }
  * 并且**让两条规则共用同一个 `p` 判据**——共用之后，这个判据要么两条一起生效、
  * 要么两条一起失效，不会再出现「一条中一条不中」这种只看得见一半的坏法。
  */
-.section-home p:not(:has(img)):has(> a:only-child) {
+.section-home p:not(:has(img)):has(> a:only-child:not([title])) {
   clear: both;
   /* **上边距写死，不跟着上一个元素走。** 这个按钮上面可能是三种东西，各自的下边距
      都不一样：封面条 `<ul>`（12px）、广播正文 `<p>`（1em）、一个没有封面的
      `<h3>`（8px）。不写死的话同一个按钮在首页上下会有三种间距。 */
   margin-top: var(--s4);
 }
-.section-home p:not(:has(img)) > a:only-child {
+/*
+ * **`:not([title])` 把广播的出处排除在外。**
+ *
+ * 这条规则说的是「首页每一节末尾那个『看全部 →』」，而它写的是「整段只有一个
+ * 链接的那一段」——在只有那种按钮长这样的年代，两者恰好等价。广播预览带上出处
+ * 之后就分了家：出处被画成了一个跟「看全部 1344 →」一模一样的胶囊，
+ * 而它既不是导航、也不通向站内。判据用 title，与广播页那边是同一把钥匙
+ * （生成器写死的 SOURCE_LINK_TITLE），只是从另一侧用。
+ */
+.section-home p:not(:has(img)) > a:only-child:not([title]) {
   display: inline-block; font-size: .9rem; line-height: 1.9;
   padding: 0 var(--s3); border-radius: 999px;
   border: 1px solid var(--brand-line); background: var(--brand-soft);
 }
-.section-home p:not(:has(img)) > a:only-child:hover {
+.section-home p:not(:has(img)) > a:only-child:not([title]):hover {
   border-color: var(--brand); text-decoration: none;
 }
 
@@ -518,19 +527,6 @@ td:first-child { color: var(--text-dim); white-space: nowrap; width: 1%; }
   margin-top: var(--s5);
   /* 上一条的封面是浮动的，不清掉的话这条的时间戳会挤到它旁边去。 */
   clear: both;
-  /*
-   * **下外边距归零，为的是让下面那枚出处角标的位置算得死。**
-   *
-   * 角标是「往上提一行」提回时间戳那一行的（见文件末尾那一段）。提多少，取决于
-   * 标题的下外边距与出处那一段的上外边距**折叠之后**是多少——而那一段是个高度
-   * 为 0 的空块（里面只有一个浮动），外边距会连着后面那一段一起折叠，折叠结果
-   * 取哪一个是要去查规范的。两边都写 0，就没有可折叠的东西，提的距离正好是
-   * 一行。
-   *
-   * 视觉上这是**零改动**：紧跟着的正文段落自带 1em(16px) 上外边距，本来就压过
-   * 这里的 8px，折叠后两种写法都是 16px。
-   */
-  margin-bottom: 0;
 }
 /* 每条广播自成一块，把里面的浮动收住——否则最后一条的封面会漏到月份边界外面。
    `flow-root` 只是「造一个 BFC」，不像 `overflow: hidden` 那样会裁掉东西。 */
@@ -644,7 +640,7 @@ a[href^="http"]:not(:has(img))::after {
   mask: var(--icon-external) no-repeat center / contain;
 }
 
-/* ── 广播的出处：时间戳右端的一枚角标（只在广播页）
+/* ── 广播的出处：时间戳右端的一枚角标
  *
  * 一条广播长这样：
  *
@@ -656,12 +652,16 @@ a[href^="http"]:not(:has(img))::after {
  * alt 留空」是同一条），只是视觉上收成一枚豆瓣标 + 站外角标，浮到时间戳那一行
  * 的最右端。`font-size: 0` 把文字收掉，图标因此不能用 em —— 用 rem，不跟着塌成 0。
  *
- * ## 为什么不做成标题自己的链接
+ * ## 广播页与首页都要
  *
- * 生成器那边写着（`markdown.js` 的 `broadcastBlock`）：**锚点是 SSG 从标题文字
- * 生成的**，往标题里塞四个字，站内所有指向某条广播的固定链接当场全断。所以
- * Markdown 里它只能是紧跟在标题后面的独立一段，**由这里把它挪回那一行**——
- * 版式是主题的事。
+ * 同一段 Markdown 出现在两处：按月的广播页（`.section-broadcast`）和首页的广播
+ * 预览（`.section-home`）。**第一版只写了广播页**，于是首页那五条的出处落进了
+ * 「首页每节末尾那个『看全部 →』胶囊」那条规则里，被画成了一个跟
+ * 「看全部 1344 →」一模一样的按钮——而首页是这个站点第一眼看到的地方。
+ *
+ * 那次漏掉不是因为规则难写，是因为**验证的范围跟着预期走了**：量了
+ * `broadcast/*.html` 里 3493 枚角标，没量首页。判据现在是「全站每一个带 title
+ * 的出处链接」，测试也按这个范围写。
  *
  * ## 判据是 `title`，不是「整段只有一个站外链接」
  *
@@ -676,19 +676,31 @@ a[href^="http"]:not(:has(img))::after {
  *
  * ## 那个上提的距离
  *
- * 浮动 + 负的上外边距，提「一行」的高度。一行 = 标题的 font-size(1rem) ×
- * body 的 line-height(1.7)。标题的下外边距在上面已经归零、这一段的外边距也归零，
- * 所以这一段的顶就贴着标题的底，提 1.7rem 正好落回标题的内容顶端；再把这一块
- * 撑成一行高、里面居中，两枚图标就落在时间戳的中线上。
+ * 浮动 + 负的上外边距，提「一行」的高度——`--stamp-line`，两处的标题字号不一样，
+ * 所以两处各给一个值。标题的下外边距与这一段的外边距都归零（下面第一条规则），
+ * 所以这一段的顶就贴着标题的底，提一行正好落回标题的内容顶端；再把这一块撑成
+ * 一行高、里面居中，两枚图标就落在时间戳的中线上。
+ *
+ * 标题那条外边距用 `:has()` 限定成「后面真的跟着一段出处」才归零，而不是一律
+ * 归零：没有出处的那 10 条广播不该被这条版式规则碰到。
  *
  * `float` 而不是负 margin 硬顶：浮动脱离常规流，那一段因此不占高度——用户看到
  * 的「白白占掉一整行」正是它以前还在流里造出来的那个行框。外面的 `article`
- * 已经是 `flow-root`，浮动漏不出去；下一条广播的 `h3` 带着 `clear: both`。
+ * 已经是 `flow-root`，浮动漏不出去；下一条广播的 `h3` 带着 `clear: both`，
+ * 首页的 `h2` / `h3` 也是。
  */
-.section-broadcast h3 + p:has(> a[href^="http"][title]:only-child) { margin: 0; }
-.section-broadcast h3 + p > a[href^="http"][title]:only-child {
-  /* 时间戳那一行的高度。改 body 的 line-height 就要跟着改这里。 */
-  --stamp-line: 1.7rem;
+
+/* 一行有多高：跟着各自 `h3` 的 font-size 走，行高都是 body 的 1.7。 */
+.section-broadcast { --stamp-line: 1.7rem; }   /* h3 是 1rem */
+.section-home { --stamp-line: 1.615rem; }      /* h3 是 .95rem */
+
+.section-broadcast h3:has(+ p > a[href^="http"][title]:only-child),
+.section-home h3:has(+ p > a[href^="http"][title]:only-child) { margin-bottom: 0; }
+.section-broadcast h3 + p:has(> a[href^="http"][title]:only-child),
+.section-home h3 + p:has(> a[href^="http"][title]:only-child) { margin: 0; }
+
+.section-broadcast h3 + p > a[href^="http"][title]:only-child,
+.section-home h3 + p > a[href^="http"][title]:only-child {
   float: right;
   display: inline-flex;
   align-items: center;
@@ -699,7 +711,8 @@ a[href^="http"]:not(:has(img))::after {
   opacity: .5;
 }
 /* 豆瓣标。`flex: none` 是必须的：flex 项默认可以被压扁，而这是一张图不是一段字。 */
-.section-broadcast h3 + p > a[href^="http"][title]:only-child::before {
+.section-broadcast h3 + p > a[href^="http"][title]:only-child::before,
+.section-home h3 + p > a[href^="http"][title]:only-child::before {
   content: "";
   flex: none;
   width: .82rem;
@@ -707,10 +720,12 @@ a[href^="http"]:not(:has(img))::after {
   background: var(--icon-douban) no-repeat center / contain;
 }
 /* 站外角标。尺寸与间距全部换成 rem —— 全局那条用的是 em，在这里会塌成 0。 */
-.section-broadcast h3 + p > a[href^="http"][title]:only-child::after {
+.section-broadcast h3 + p > a[href^="http"][title]:only-child::after,
+.section-home h3 + p > a[href^="http"][title]:only-child::after {
   flex: none;
   width: .62rem;
   height: .62rem;
   margin-left: .2rem;
 }
-.section-broadcast h3 + p > a[href^="http"][title]:only-child:hover { opacity: 1; }
+.section-broadcast h3 + p > a[href^="http"][title]:only-child:hover,
+.section-home h3 + p > a[href^="http"][title]:only-child:hover { opacity: 1; }
