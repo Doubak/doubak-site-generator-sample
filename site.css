@@ -729,3 +729,14 @@ a[href^="http"]:not(:has(img))::after {
 }
 .section-broadcast h3 + p > a[href^="http"][title]:only-child:hover,
 .section-home h3 + p > a[href^="http"][title]:only-child:hover { opacity: 1; }
+
+/* 「这一份掺了豆瓣上不公开的东西」。页脚里唯一一条**关于这份存档本身**的话，
+   所以它不跟着别的页脚文字挤在一行，也不用 --dim ——它要读得见。
+   颜色只用已经定义过的变量：拼错的变量名不会报错，只会让这句话变成不可见——
+   而那正好是它最不该出的错（见 test/theme-vars.test.js；那条检查连注释里的
+   引用也一起扫，所以这里不写出那个形状）。 */
+.private-note {
+  margin: 0.75em 0 0;
+  color: var(--text);
+  font-size: 0.9em;
+}
