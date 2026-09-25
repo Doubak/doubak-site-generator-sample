@@ -33,7 +33,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  MODE: pr
+  MODE: push
 
 jobs:
   sitemap:

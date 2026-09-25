@@ -29,8 +29,7 @@ node bin/deploy.js ~/downloads/canonical ~/downloads/exports <这个目录> --in
 ### sitemap 是 GitHub Actions 自己长出来的
 
 `.github/workflows/sitemap.yml` 在每次推到 `main` 之后重新生成 `sitemap.xml`，
-默认开一个 PR 让你合（把文件顶上的 `MODE` 从 `pr` 改成 `push` 就直接提交到
-`main`）。生成用 [cicirello/generate-sitemap](https://github.com/cicirello/generate-sitemap)，
+直接提交到 `main`（把文件顶上的 `MODE` 改回 `pr` 可切换为开 PR 模式）。生成用 [cicirello/generate-sitemap](https://github.com/cicirello/generate-sitemap)，
 之后再过一遍 `.github/scripts/fix_sitemap.py`：去掉分页的「第 1 页」跳转壳子
 （那是 meta refresh，不是页面），并把中日文 tag 路径按 RFC 3986 转义。
 这个脚本有测试，只用标准库，`python3 .github/scripts/test_fix_sitemap.py` 就能跑。
