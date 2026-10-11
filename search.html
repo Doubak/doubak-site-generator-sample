@@ -39,6 +39,10 @@
     
       <a href="./doulist/index.html">豆列</a>
     
+      <a href="./album/index.html">相册</a>
+    
+      <a href="./group/index.html">小组</a>
+    
     <a href="./search.html">搜索</a>
   </nav>
 </div></header>
@@ -72,8 +76,8 @@
   var rows = null;
 
   var NAMES = { movie: '影视', book: '书', music: '音乐', game: '游戏', drama: '舞台剧',
-                note: '日记', review: '评论' };
-  var KIND = { m: '标记', b: '广播', l: '长文', d: '豆列' };
+                note: '日记', review: '评论', album: '相册', group: '小组' };
+  var KIND = { m: '标记', b: '广播', l: '长文', d: '豆列', a: '相册', g: '小组' };
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -135,12 +139,13 @@
     var html = '';
     for (var k = 0; k < Math.min(hits.length, 200); k++) {
       var h = hits[k], d = h.r;
-      var title = d.n || (d.t === 'b' ? '广播' : '未知作品');
+      var title = d.n || (d.t === 'b' ? '广播' : d.t === 'g' ? '无标题话题' : '未知作品');
       
       
       
       var titleHtml = d.n ? highlight(d.n, lq) : esc(title);
-      var where = KIND[d.t] + (d.k ? ' · ' + (NAMES[d.k] || d.k) : '');
+      var sub = d.k ? (NAMES[d.k] || d.k) : '';
+      var where = KIND[d.t] + (sub && sub !== KIND[d.t] && sub !== d.t && sub !== 'doulist' ? ' · ' + sub : '');
       
       
       var hitInfo = d.w && d.w.toLowerCase().indexOf(lq) >= 0
