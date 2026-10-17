@@ -853,3 +853,9 @@ a[href^="http"]:not(:has(img))::after {
 .section-group article ul li a:first-child:hover img {
   border-color: var(--brand);
 }
+
+/* 头像是站名的装饰，站名仍是链接的可访问名称。 */
+.home > a, a.home { display: inline-flex; align-items: center; gap: .6rem; }
+.account-avatar { width: 40px; height: 40px; object-fit: contain; flex: none; }
+
+header.site .home.has-avatar::before { display: none; }
