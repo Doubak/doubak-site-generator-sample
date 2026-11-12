@@ -754,6 +754,29 @@ a[href^="http"]:not(:has(img))::after {
 .section-broadcast h3 + p > a[href^="http"][title]:only-child:hover,
 .section-home h3 + p > a[href^="http"][title]:only-child:hover { opacity: 1; }
 
+/* 回复只显示抓取首屏的下限；不复用出处链接的隐藏文字或图片链接的零行高。 */
+:is(.section-home, .section-broadcast) p:has(> a[title^="归档回复首屏："]) {
+  margin: var(--s1) 0 var(--s3);
+  font-size: .8rem;
+}
+.section-home p > a[title^="归档回复首屏："],
+.section-broadcast article p > a[title^="归档回复首屏："],
+.section-broadcast .entry p > a[title^="归档回复首屏："] {
+  display: inline-block;
+  line-height: 1.7;
+  padding: 0 var(--s2);
+  border: 1px solid var(--line);
+  border-radius: var(--r1);
+  color: var(--text-dim);
+}
+.section-home p > a[title^="归档回复首屏："]:hover,
+.section-broadcast article p > a[title^="归档回复首屏："]:hover,
+.section-broadcast .entry p > a[title^="归档回复首屏："]:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  text-decoration: none;
+}
+
 /* 「这一份掺了豆瓣上不公开的东西」。页脚里唯一一条**关于这份存档本身**的话，
    所以它不跟着别的页脚文字挤在一行，也不用 --dim ——它要读得见。
    颜色只用已经定义过的变量：拼错的变量名不会报错，只会让这句话变成不可见——
