@@ -882,3 +882,6 @@ a[href^="http"]:not(:has(img))::after {
 .account-avatar { width: 40px; height: 40px; object-fit: contain; flex: none; }
 
 header.site .home.has-avatar::before { display: none; }
+
+/* Series names can be long and contain unbroken original-language titles. */
+.section-movie article ul { overflow-wrap: anywhere; }
