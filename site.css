@@ -754,9 +754,10 @@ a[href^="http"]:not(:has(img))::after {
 .section-broadcast h3 + p > a[href^="http"][title]:only-child:hover,
 .section-home h3 + p > a[href^="http"][title]:only-child:hover { opacity: 1; }
 
-/* 回复只显示抓取首屏的下限；不复用出处链接的隐藏文字或图片链接的零行高。 */
+/* 回复只显示抓取首屏的下限，位于广播末尾；清掉左侧浮动封面，并保持与上下块的紧凑间距。 */
 :is(.section-home, .section-broadcast) p:has(> a[title^="归档回复首屏："]) {
-  margin: var(--s1) 0 var(--s3);
+  clear: both;
+  margin: var(--s2) 0 var(--s3);
   font-size: .8rem;
 }
 .section-home p > a[title^="归档回复首屏："],
